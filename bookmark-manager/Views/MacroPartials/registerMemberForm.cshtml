@@ -59,21 +59,24 @@ else
 
             @Html.ValidationSummary("registerModel", true)
 
-            @Html.LabelFor(m => registerModel.Name)
-            @Html.TextBoxFor(m => registerModel.Name)
-            @Html.ValidationMessageFor(m => registerModel.Name)
-            <br />
-
-            @Html.LabelFor(m => registerModel.Email)
-            @Html.TextBoxFor(m => registerModel.Email)
-            @Html.ValidationMessageFor(m => registerModel.Email)
-            <br />
-
-            @Html.LabelFor(m => registerModel.Password)
-            @Html.PasswordFor(m => registerModel.Password)
-            @Html.ValidationMessageFor(m => registerModel.Password)
-            <br />
-
+            <div class="form-group">
+                @Html.LabelFor(m => registerModel.Name)
+                @Html.TextBoxFor(m => registerModel.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => registerModel.Name)
+            </div>
+            
+            <div class="form-group">
+                @Html.LabelFor(m => registerModel.Email)
+                @Html.TextBoxFor(m => registerModel.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => registerModel.Email)
+            </div>
+               
+            <div class="form-group">
+                @Html.LabelFor(m => registerModel.Password)
+                @Html.PasswordFor(m => registerModel.Password, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => registerModel.Password)
+            </div>
+            
             @if (registerModel.MemberProperties != null)
             {
                 @*
@@ -99,7 +102,7 @@ else
             @Html.HiddenFor(m => registerModel.RedirectUrl)
             @Html.HiddenFor(m => registerModel.UsernameIsEmail)
 
-            <button>Register</button>
+            <button class="btn btn-primary">Register</button>
         </fieldset>
     }
 }

@@ -27,16 +27,18 @@
         
         @Html.ValidationSummary("loginModel", true)
 
-        @Html.LabelFor(m => loginModel.Username)
-        @Html.TextBoxFor(m => loginModel.Username)
-        @Html.ValidationMessageFor(m => loginModel.Username)
-        <br />
+		<div class="form-group">
+			@Html.LabelFor(m => loginModel.Username, "Email")
+        	@Html.TextBoxFor(m => loginModel.Username, new { @class = "form-control" })
+        	@Html.ValidationMessageFor(m => loginModel.Username)
+		</div>
 
+		<div class="form-group">
         @Html.LabelFor(m => loginModel.Password)
-        @Html.PasswordFor(m => loginModel.Password)
+        @Html.PasswordFor(m => loginModel.Password, new { @class = "form-control" })
         @Html.ValidationMessageFor(m => loginModel.Password)
-        <br />
+		</div>
 
-        <button>Login</button>
+        <button class="btn btn-primary">Login</button>
     </fieldset>  
 }

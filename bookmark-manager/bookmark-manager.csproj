@@ -3247,6 +3247,9 @@
     <Content Include="Umbraco\Webservices\TreeDataService.ashx" />
     <Content Include="Umbraco\Webservices\UltimatePickerAutoCompleteHandler.ashx" />
     <Content Include="Umbraco\Xslt\Web.config" />
+    <Content Include="Views\MacroPartials\bookmarkList.cshtml" />
+    <Content Include="Views\MacroPartials\loginMemberForm.cshtml" />
+    <Content Include="Views\MacroPartials\registerMemberForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
