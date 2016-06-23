@@ -1,0 +1,34 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.content-landing
+{
+  @extend .content-default;
+
+  padding: 60px;
+  text-align: center;
+
+  h1
+  {
+    font-size: ($font-size-base * 3);
+    font-weight: bold;
+
+    span
+    {
+      color: $brand-danger;
+    }
+  }
+
+  p
+  {
+    font-size: $font-size-large;
+  }
+}
+
+.content-landing-form-wrapper
+{
+  @include make-sm-column(6);
+
+  margin-top: 30px;
+}

@@ -1,0 +1,72 @@
+// Place all the styles related to the Bookmarks controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.bookmark-list
+{
+  @extend .list-group;
+
+  margin: 0;
+
+  li
+  {
+    @extend .list-group-item;
+
+    border: none;
+    display: table;
+    margin-bottom: 1px;
+    width: 100%;
+
+    &:first-child, &:last-child
+    {
+      border-radius: 0;
+    }
+
+    &:last-child
+    {
+      border-bottom-width: 0;
+    }
+
+    .bookmark-favicon
+    {
+      display: table-cell;
+      width: 31px; // img width + list-group-item padding
+
+      img
+      {
+        height: 16px;
+        width: 16px;
+      }
+    }
+
+    .bookmark-content
+    {
+      display: table-cell;
+
+      h1
+      {
+        @extend .list-group-item-heading;
+        
+        font-size: $font-size-base;
+        font-weight: bold;
+      }
+
+      p
+      {
+        @extend .list-group-item-text;
+      }
+    }
+
+    .bookmark-tags
+    {
+      margin-top: 10px;
+    }
+
+    .bookmark-action
+    {
+      display: table-cell;
+      width: 1px;
+      padding: 0 0 0 10px;
+    }
+  }
+}

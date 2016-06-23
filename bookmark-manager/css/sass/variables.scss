@@ -1,0 +1,42 @@
+// Color scheme
+$color-light: #bdc3c7;
+$color-lighter: #ecf0f1;
+$color-lightest: #ffffff;
+$color-dark: #34495e;
+$color-darker: #2c3e50;
+
+// Custom variables
+$content-width: 800px;
+$content-background: fade-out($color-lightest, 0.5);
+$content-hover-background: fade-out($color-lightest, 0.3);
+
+// Bootstrap variables
+$body-bg: $color-lighter;
+$brand-danger: #e74c3c;
+$brand-info: #3498db;
+$brand-primary: #2980b9;
+$brand-success: #33ce74;
+$brand-warning: #f39c12;
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$font-size-base: 13px;
+$font-size-h1: ceil(($font-size-base * 1.25));
+$link-color: $color-dark;
+$link-hover-color: $brand-primary;
+$link-hover-decoration: none;
+$list-group-bg: $content-background;
+$list-group-hover-bg: $content-hover-background;
+$list-group-link-heading-color: $color-dark;
+$navbar-default-bg: $content-background;
+$navbar-default-border: none;
+$navbar-default-brand-color: $color-dark;
+$navbar-default-brand-hover-color: $color-darker;
+$navbar-default-link-color: $color-dark;
+$navbar-default-link-hover-color: $link-hover-color;
+$state-danger-bg: $brand-danger;
+$state-danger-border: darken($state-danger-bg, 10%);
+$state-danger-text: #ffffff;
+$state-info-bg: $brand-primary;
+$state-info-border: darken($state-info-bg, 10%);
+$state-info-text: #ffffff;
+$table-border-color: fade-out($color-dark, 0.9);
+$text-color: $color-dark;
