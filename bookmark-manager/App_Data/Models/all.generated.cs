@@ -7,7 +7,11 @@ using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.3")]
+//<<<<<<< HEAD
+//[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
+//=======
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.5")]
+//>>>>>>> 2ca110681e263e268062a20a2396087cecd11942
 
 
 // FILE: models.generated.cs
