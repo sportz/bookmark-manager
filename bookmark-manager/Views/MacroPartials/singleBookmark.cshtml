@@ -1,0 +1,44 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{ 
+    String favIconService = "http://www.google.com/s2/favicons?domain_url=";
+    var linkUrl = Url.Encode(Umbraco.Field("link").ToString());
+    String favIconUrl = favIconService + linkUrl;
+
+}	
+
+<!-- Favicon -->
+<div class="bookmark-favicon">
+    <img src="@favIconUrl">
+</div>
+<!-- Title and URL -->
+<div class="bookmark-content">
+    <a href="@Umbraco.Field("link")" alt="@Umbraco.Field("title")">
+        <h1>
+            @Umbraco.Field("title")
+        </h1>
+        <p>@Umbraco.Field("link")</p>
+    </a>
+    <!-- TODO Tags-->
+    <% if !bookmark.tags.empty? %>
+    <div class="bookmark-tags">
+        <% bookmark.tags.each do |tag| %>
+        <%= link_to tag do %>
+        <span class="label label-<%= tag.color %>"><%= tag.title %></span>
+        <% end %>
+        <% end %>
+    </div>
+    <% end %>
+</div>
+<!-- Edit -->
+<div class="bookmark-action">
+    <%= link_to edit_bookmark_path(bookmark) do %>
+    <span class="glyphicon glyphicon-edit"></span>
+    <% end %>
+</div>
+<!-- Delete -->
+<div class="bookmark-action">
+    <%= link_to bookmark, method: :delete, data: { confirm: 'Are you sure?' } do %>
+    <span class="glyphicon glyphicon-trash"></span>
+    <% end %>
+</div>

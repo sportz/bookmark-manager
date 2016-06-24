@@ -7,11 +7,7 @@ using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
-//<<<<<<< HEAD
-//[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
-//=======
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.5")]
-//>>>>>>> 2ca110681e263e268062a20a2396087cecd11942
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -116,6 +112,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<Bookmarks, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// bookmarksLayout
+		///</summary>
+		[ImplementPropertyType("bookmarksLayout")]
+		public Newtonsoft.Json.Linq.JToken BookmarksLayout
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("bookmarksLayout"); }
 		}
 	}
 
