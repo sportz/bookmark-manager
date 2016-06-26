@@ -10,8 +10,14 @@
 
 
     if (umbraco.library.IsLoggedOn()) {
-        var currentMember = Members.GetCurrentMember();
-        IEnumerable<IContent> bookmarks = CurrentPage.Site().Children("bookmarks");
+        var currentMemberId = Members.GetCurrentMemberId();
+        IContent userBookmarks = CurrentPage
+            .Site()
+            .Children("bookmarks")
+            .Where(x => x.memberId == currentMemberId)
+            .first();
+    } else {
+        //Redirect oder so, falls es nicht etwas wie das authenticate: user! gibt
     }
 
 

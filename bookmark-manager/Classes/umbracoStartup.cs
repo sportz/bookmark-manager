@@ -35,8 +35,8 @@ namespace bookmark_manager.Classes {
             var contentTypeAlias = "userBookmark";
 
             // User information
-            var userName = e.Entity.Name;
-            var userId = e.Entity.Id;
+            var memberName = e.Entity.Name;
+            var memberId = e.Entity.Id;
 
             var contentService = ApplicationContext.Current.Services.ContentService;
 
@@ -56,7 +56,8 @@ namespace bookmark_manager.Classes {
                 contentService.Save(bookmarksRoot);
             }
 
-            IContent userBookmarksNode = contentService.CreateContent(userName, bookmarksRoot, contentTypeAlias, userId);
+            IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, contentTypeAlias, memberId);
+            userBookmarksNode.SetValue("memberId", memberId);
             contentService.Save(userBookmarksNode);
 
         }
