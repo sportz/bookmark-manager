@@ -1,25 +1,33 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
 @{ 
-    String favIconService = "http://www.google.com/s2/favicons?domain_url=";
-    var linkUrl = Url.Encode(Umbraco.Field("link").ToString());
-    String favIconUrl = favIconService + linkUrl;
+    var bookmarkId = Model.MacroParameters["bookmarkId"].TryConvertTo<int>();
+    //int bookmarkId = bookmarkIdParam.TryConvertTo();
+    var cs = ApplicationContext.Services.ContentService;
+    var bookmark = cs.GetById(bookmarkId.Result);
 
+    
+    string favIconService = "http://www.google.com/s2/favicons?domain_url=";
+    string linkUrl = Url.Encode(bookmark.GetValue("link").ToString());
+    string favIconUrl = favIconService + linkUrl;
+    
+    
 }	
 
 <!-- Favicon -->
 <div class="bookmark-favicon">
-    <img src="@favIconUrl">
+    <img src="@favIconUrl" />
 </div>
 <!-- Title and URL -->
 <div class="bookmark-content">
-    <a href="@Umbraco.Field("link")" alt="@Umbraco.Field("title")">
+     <a href="@bookmark.GetValue("link")" alt="@bookmark.GetValue("title")">
         <h1>
-            @Umbraco.Field("title")
+            @bookmark.GetValue("title")
         </h1>
-        <p>@Umbraco.Field("link")</p>
+        <p>@bookmark.GetValue("link")</p>
     </a>
     <!-- TODO Tags-->
+    @*
     <% if !bookmark.tags.empty? %>
     <div class="bookmark-tags">
         <% bookmark.tags.each do |tag| %>
@@ -29,16 +37,21 @@
         <% end %>
     </div>
     <% end %>
+    *@
 </div>
 <!-- Edit -->
-<div class="bookmark-action">
-    <%= link_to edit_bookmark_path(bookmark) do %>
-    <span class="glyphicon glyphicon-edit"></span>
-    <% end %>
-</div>
-<!-- Delete -->
-<div class="bookmark-action">
-    <%= link_to bookmark, method: :delete, data: { confirm: 'Are you sure?' } do %>
-    <span class="glyphicon glyphicon-trash"></span>
-    <% end %>
-</div>
+@*
+    <div class="bookmark-action">
+        <%= link_to edit_bookmark_path(bookmark) do %>
+        <span class="glyphicon glyphicon-edit"></span>
+        <% end %>
+    </div>
+*@
+@*
+    <!-- Delete -->
+    <div class="bookmark-action">
+        <%= link_to bookmark, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <span class="glyphicon glyphicon-trash"></span>
+        <% end %>
+    </div>
+*@

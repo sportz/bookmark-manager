@@ -4,24 +4,34 @@
 @{
     Layout = null;
 
+}
 
 
-    <h1>Hier kommen dann die Bookmarks hin</h1>
 
+<h1>Hier kommen dann die Bookmarks hin</h1>
 
-    if (umbraco.library.IsLoggedOn()) {
-        var currentMemberId = Members.GetCurrentMemberId();
-        IContent userBookmarks = CurrentPage
-            .Site()
-            .Children("bookmarks")
-            .Where(x => x.memberId == currentMemberId)
-            .first();
-    } else {
-        //Redirect oder so, falls es nicht etwas wie das authenticate: user! gibt
-    }
+@if (!umbraco.library.IsLoggedOn()) {
+    //Redirect oder so, falls es nicht etwas wie das authenticate: user! gibt
+    Response.Redirect("/login");
+    // => geht nicht richtig!
+}
 
+<div class="content">
 
     <ul class="bookmark-list">
-        foreach(var node in 
+
+        @{
+            var cs = ApplicationContext.Services.ContentService;
+            var rootNodes = cs.GetRootContent();
+            var bookmarks = rootNodes.Where(x => x.ContentType.Alias == "bookmarks").First();
+            var userBookmarks = bookmarks.Children().Where(x => x.GetValue<int>("memberId") == Members.GetCurrentMemberId()).First(); //.Where(x => x.MemberId == Members.GetCurrentMemberId());
+            foreach (var bookmark in userBookmarks.Children()) {
+                <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
+            }
+
+        }
+
     </ul>
-}
+</div>
+
+

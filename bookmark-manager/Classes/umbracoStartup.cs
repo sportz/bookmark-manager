@@ -15,6 +15,9 @@ namespace bookmark_manager.Classes {
 
             // EventHandler registieren
             MemberService.Created += createUserBookmarkNodeAfterRegister;
+
+            // TODO Eventhandler wenn Member gelöscht wird
+           // MemberService.Deleted += deleteUserBookmarkContent;
         }
 
 

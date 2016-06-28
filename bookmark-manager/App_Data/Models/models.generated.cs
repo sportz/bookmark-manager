@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -54,24 +54,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public Newtonsoft.Json.Linq.JToken Layout
 		{
 			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
-		}
-
-		///<summary>
-		/// Message
-		///</summary>
-		[ImplementPropertyType("message")]
-		public string Message
-		{
-			get { return this.GetPropertyValue<string>("message"); }
-		}
-
-		///<summary>
-		/// Title
-		///</summary>
-		[ImplementPropertyType("title")]
-		public string Title
-		{
-			get { return this.GetPropertyValue<string>("title"); }
 		}
 	}
 
@@ -177,15 +159,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Link
 		{
 			get { return this.GetPropertyValue<string>("link"); }
-		}
-
-		///<summary>
-		/// member
-		///</summary>
-		[ImplementPropertyType("member")]
-		public object Member
-		{
-			get { return this.GetPropertyValue("member"); }
 		}
 
 		///<summary>

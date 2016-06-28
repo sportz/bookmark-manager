@@ -69,24 +69,6 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
 		}
-
-		///<summary>
-		/// Message
-		///</summary>
-		[ImplementPropertyType("message")]
-		public string Message
-		{
-			get { return this.GetPropertyValue<string>("message"); }
-		}
-
-		///<summary>
-		/// Title
-		///</summary>
-		[ImplementPropertyType("title")]
-		public string Title
-		{
-			get { return this.GetPropertyValue<string>("title"); }
-		}
 	}
 
 	/// <summary>Bookmarks</summary>
@@ -191,15 +173,6 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Link
 		{
 			get { return this.GetPropertyValue<string>("link"); }
-		}
-
-		///<summary>
-		/// member
-		///</summary>
-		[ImplementPropertyType("member")]
-		public object Member
-		{
-			get { return this.GetPropertyValue("member"); }
 		}
 
 		///<summary>
