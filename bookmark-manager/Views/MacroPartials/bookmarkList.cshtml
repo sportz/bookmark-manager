@@ -6,18 +6,24 @@
 
 }
 
-
-
-<h1>Hier kommen dann die Bookmarks hin</h1>
-
-@if (!umbraco.library.IsLoggedOn()) {
-    //Redirect oder so, falls es nicht etwas wie das authenticate: user! gibt
-    Response.Redirect("/login");
-    // => geht nicht richtig!
+@if (!umbraco.library.IsLoggedOn())
+{
+    Response.Redirect("/");
+    return;
 }
 else
 {
     <div class="content">
+        <div class="toolbar">
+            <a class="navbar-brand" href="/bookmarks">
+                <!-- TODO Tag name -->
+                All Bookmarks
+            </a>  
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-plus"></span></a></li>
+            </ul>
+        </div>
+
         <ul class="bookmark-list">
             @{
                 var cs = ApplicationContext.Services.ContentService;

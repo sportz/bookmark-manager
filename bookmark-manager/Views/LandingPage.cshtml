@@ -4,4 +4,10 @@
 	Layout = "Master.cshtml";
 }
 
-@CurrentPage.GetGridHtml("layout")
+@if (library.IsLoggedOn())
+{
+    Response.Redirect("/bookmarks");
+    return;
+}
+
+@CurrentPage.GetGridHtml("layout");

@@ -37,19 +37,16 @@
         <% end %>
     *@
 </div>
+
 <!-- Edit -->
-@*
-    <div class="bookmark-action">
-        <%= link_to edit_bookmark_path(bookmark) do %>
-        <span class="glyphicon glyphicon-edit"></span>
-        <% end %>
-    </div>
-*@
-@*
-    <!-- Delete -->
-    <div class="bookmark-action">
-        <%= link_to bookmark, method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <span class="glyphicon glyphicon-trash"></span>
-        <% end %>
-    </div>
-*@
+<div class="bookmark-action">
+    <!-- TODO Link/Controller action -->
+    <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+</div>
+
+<!-- Delete -->
+<div class="bookmark-action">
+    <!-- TODO Link/controller action -->
+    <!-- TODO Confirmation -->
+    <a href="#"><span class="glyphicon glyphicon-trash"></span></a>
+</div>

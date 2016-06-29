@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Bookmark Manager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">-->
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
@@ -18,7 +18,7 @@
     <!-- Show devise errors (if any) -->
     <!-- <%= devise_error_messages! %> -->
     <!-- Toolbar -->
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <nav class="header">
         <div class="container">
             <div class="navbar-header">
                 @if (library.IsLoggedOn())
@@ -35,7 +35,7 @@
             @if (library.IsLoggedOn())
             {
                 <div class="collapse navbar-collapse" id="bookmark-navbar-collapse">
-                    @Umbraco.RenderMacro("loginStatus");
+                    @Umbraco.RenderMacro("loginStatus")
                 </div>
             }
 
