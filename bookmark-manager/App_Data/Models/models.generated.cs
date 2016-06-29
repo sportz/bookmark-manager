@@ -57,7 +57,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>Bookmarks</summary>
+	/// <summary>Bookmarks Root</summary>
 	[PublishedContentModel("bookmarks")]
 	public partial class Bookmarks : PublishedContentModel
 	{
@@ -92,16 +92,16 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>User Bookmark</summary>
-	[PublishedContentModel("userBookmark")]
-	public partial class UserBookmark : Bookmarks
+	/// <summary>Bookmarks Member</summary>
+	[PublishedContentModel("bookmarksMember")]
+	public partial class BookmarksMember : PublishedContentModel
 	{
 #pragma warning disable 0109 // new is redundant
-		public new const string ModelTypeAlias = "userBookmark";
+		public new const string ModelTypeAlias = "bookmarksMember";
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 #pragma warning restore 0109
 
-		public UserBookmark(IPublishedContent content)
+		public BookmarksMember(IPublishedContent content)
 			: base(content)
 		{ }
 
@@ -112,7 +112,7 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 #pragma warning restore 0109
 
-		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<UserBookmark, TValue>> selector)
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BookmarksMember, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
@@ -129,7 +129,7 @@ namespace Umbraco.Web.PublishedContentModels
 
 	/// <summary>Bookmark</summary>
 	[PublishedContentModel("bookmark")]
-	public partial class Bookmark : UserBookmark
+	public partial class Bookmark : PublishedContentModel
 	{
 #pragma warning disable 0109 // new is redundant
 		public new const string ModelTypeAlias = "bookmark";
@@ -162,16 +162,16 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// tag
+		/// tags
 		///</summary>
-		[ImplementPropertyType("tag")]
-		public object Tag
+		[ImplementPropertyType("tags")]
+		public object Tags
 		{
-			get { return this.GetPropertyValue("tag"); }
+			get { return this.GetPropertyValue("tags"); }
 		}
 
 		///<summary>
-		/// Title
+		/// title
 		///</summary>
 		[ImplementPropertyType("title")]
 		public string Title

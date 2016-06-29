@@ -2,11 +2,15 @@
 
 @{
     var bookmarkId = Model.MacroParameters["bookmarkId"].TryConvertTo<int>();
-    //int bookmarkId = bookmarkIdParam.TryConvertTo();
     var cs = ApplicationContext.Services.ContentService;
     var bookmark = cs.GetById(bookmarkId.Result);
 
+    var title = bookmark.GetValue<string>("title");
+    var link = bookmark.GetValue<string>("link");
+    var tagsString = bookmark.GetValue<string>("tags");
+    string[] tags = tagsString.Split(new Char[] { ',' });
 
+    // Url des FavIcon zusammen bauen
     string favIconService = "http://www.google.com/s2/favicons?domain_url=";
     string linkUrl = Url.Encode(bookmark.GetValue("link").ToString());
     string favIconUrl = favIconService + linkUrl;
@@ -18,25 +22,27 @@
 </div>
 <!-- Title and URL -->
 <div class="bookmark-content">
-    <a href="@bookmark.GetValue("link")" alt="@bookmark.GetValue("title")">
+    <a href="@link" alt="@title">
         <h1>
-            @bookmark.GetValue("title")
+            @title
         </h1>
-        <p>@bookmark.GetValue("link")</p>
+        <p>@link</p>
     </a>
-    <!-- TODO Tags-->
-    @*
-        <% if !bookmark.tags.empty? %>
+    <!-- Tags-->
+    @if (tags[0] != "") {
         <div class="bookmark-tags">
-            <% bookmark.tags.each do |tag| %>
-            <%= link_to tag do %>
-            <span class="label label-<%= tag.color %>"><%= tag.title %></span>
-            <% end %>
-            <% end %>
+            @foreach (var tag in tags) {
+                // TODO Link-Adresse 
+                // TODO Label-Farbe
+                <a href="#" >
+                    <span class="label label-blue">@tag</span>
+                </a>
+            }
         </div>
-        <% end %>
-    *@
-</div>
+    }
+
+
+        </div>
 
 <!-- Edit -->
 <div class="bookmark-action">

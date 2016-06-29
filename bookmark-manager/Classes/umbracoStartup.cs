@@ -33,7 +33,11 @@ namespace bookmark_manager.Classes {
         private void createUserBookmarkNodeAfterRegister(IMemberService sender, NewEventArgs<IMember> e)
         {
             // Type of the subnode to create
-            var contentTypeAlias = "userBookmark";
+            var bookmarksRootAlias = "bookmarks";
+            var bookmarksMemberAlias = "bookmarksMember";
+
+            // Property Names
+            var memberIdAlias = "memberId";
 
             // User information
             var memberName = e.Entity.Name;
@@ -42,23 +46,26 @@ namespace bookmark_manager.Classes {
             var contentService = ApplicationContext.Current.Services.ContentService;
 
             // Get the root node for the bookmarks
-            IContent bookmarksRoot = null;
+           // IContent bookmarksRoot = null;
             IEnumerable<IContent> rootNodes = contentService.GetRootContent();
-            foreach (IContent node in rootNodes) {
-                if(node.ContentType.Alias == "bookmarks") {
-                    bookmarksRoot = node;
-                    break;
-                }
+            IContent bookmarksRoot;
+            try {
+                bookmarksRoot = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
             }
+            catch (System.Exception error){
+                bookmarksRoot = contentService.CreateContent("Bookmarks Root", -1, bookmarksRootAlias);
+                contentService.SaveAndPublishWithStatus(bookmarksRoot);
+            }
+
+ 
 
             // TODO besser Fehler einbauen, wenn nicht vorhanden
-            if(bookmarksRoot == null) {
-                bookmarksRoot = contentService.CreateContent("All Bookmarks", -1, "bookmarks");
-                contentService.Save(bookmarksRoot);
+            if (bookmarksRoot == null) {
+               
             }
 
-            IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, contentTypeAlias, memberId);
-            userBookmarksNode.SetValue("memberId", memberId);
+            IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, bookmarksMemberAlias, memberId);
+            userBookmarksNode.SetValue(memberIdAlias, memberId);
             contentService.Save(userBookmarksNode);
         }
     }

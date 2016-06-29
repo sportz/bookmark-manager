@@ -26,10 +26,13 @@ else
 
         <ul class="bookmark-list">
             @{
+                var bookmarksRootAlias = "bookmarks";
+                var memberIdAlias = "memberId";
+
                 var cs = ApplicationContext.Services.ContentService;
                 var rootNodes = cs.GetRootContent();
-                var bookmarks = rootNodes.Where(x => x.ContentType.Alias == "bookmarks").First();
-                var userBookmarks = bookmarks.Children().Where(x => x.GetValue<int>("memberId") == Members.GetCurrentMemberId()).First(); //.Where(x => x.MemberId == Members.GetCurrentMemberId());
+                var bookmarks = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
+                var userBookmarks = bookmarks.Children().Where(x => x.GetValue<int>(memberIdAlias) == Members.GetCurrentMemberId()).First();
                 foreach (var bookmark in userBookmarks.Children())
                 {
                     <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
