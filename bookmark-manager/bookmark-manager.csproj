@@ -3246,6 +3246,7 @@
     <Content Include="Views\MacroPartials\tagList.cshtml" />
     <Content Include="Views\MacroPartials\singleBookmark.cshtml" />
     <Content Include="Views\BookmarksPage.cshtml" />
+    <Content Include="Views\MacroPartials\loginStatus.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,46 +1,48 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
 @{
-	Layout = null;
+    Layout = null;
 }
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bookmark Manager</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="/css/bootstrap.css">
-  <link rel="stylesheet" href="/css/style.css">	
+    <title>Bookmark Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+    <!-- Show messages (if any) -->
+    <!-- <% if notice %>
+    <div id="notice"><%= notice %></div>
+    <% end %> -->
+    <!-- Show devise errors (if any) -->
+    <!-- <%= devise_error_messages! %> -->
+    <!-- Toolbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                @if (library.IsLoggedOn())
+                {
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bookmark-navbar-collapse" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                }
+                <a href="/" class="navbar-brand">Bookmark Manager</a>
+            </div>
+            @if (library.IsLoggedOn())
+            {
+                <div class="collapse navbar-collapse" id="bookmark-navbar-collapse">
+                    @Umbraco.RenderMacro("loginStatus");
+                </div>
+            }
 
-  <!-- Show messages (if any) -->
-  <!-- <% if notice %>
-  <div id="notice"><%= notice %></div>
-  <% end %> -->
-
-  <!-- Show devise errors (if any) -->
-  <!-- <%= devise_error_messages! %> -->
-
-  <!-- Toolbar -->
-  <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <!-- If user signedin -->
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bookmark-navbar-collapse" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <!-- Endif user signedin -->
-        <a href="/" class="navbar-brand">Bookmark Manager</a>
-      </div>
-    </div>
-  </nav>
-
-  <main>
-    @RenderBody()
-  </main>
-
+        </div>
+    </nav>
+    <main>
+        @RenderBody()
+    </main>
 </body>
 </html>
