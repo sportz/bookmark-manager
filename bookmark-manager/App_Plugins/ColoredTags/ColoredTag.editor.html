@@ -1,0 +1,24 @@
+﻿<div ng-controller="ColoredTag.controller">
+    <form name="ColoredTagForm">
+        <div>
+            <label>Tag Title</label>
+            <input type="text" name="tagTitle" ng-model="newTag.title" />
+            <span ng-show="showEmptyWarning">You have to choose a title</span>
+        </div>
+        <div>
+            <label>Color</label>
+            <select name="colorList" ng-model="newTag.color">
+                <option ng-repeat="option in availableColors" value="{{ option.value }}">{{ option.name }}</option>
+            </select>
+        </div>
+        <input type="submit" ng-click="pushTag()" value="Add Tag" />
+    </form>
+
+    <div>
+        <ul ng-repeat="tag in model.value.tags">
+            <li>
+                <span class="label label-{{tag.color}}">{{ tag.title }}</span>
+            </li>
+        </ul>
+    </div>
+</div>

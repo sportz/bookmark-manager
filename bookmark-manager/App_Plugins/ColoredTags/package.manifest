@@ -1,0 +1,15 @@
+﻿{
+	propertyEditors: [
+		{
+			alias: "ColoredTag",
+			name: "ColoredTag",
+			editor:  {
+				valueType: "JSON",
+				view: "~/App_Plugins/ColoredTags/ColoredTag.editor.html"
+			}
+		}
+	],
+	javascript: [
+		"~/App_Plugins/ColoredTags/ColoredTag.controller.js"
+	]
+}
