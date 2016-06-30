@@ -1,4 +1,5 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Newtonsoft.Json
 
 <div class="sidebar">
     <div class="toolbar">
@@ -48,6 +49,15 @@
             foreach (var tag in tagList)
             {
                 <li><a href="#">@tag</a></li>
+            }
+
+
+            // Hier kommen meine
+            <li>Alles ab hier kommt vom Sportz</li>
+            dynamic sportzTagList = JsonConvert.DeserializeObject(userBookmarks.GetValue<string>("tagss").Replace("&quot;", "\""));
+            var haha = userBookmarks.Name;
+            foreach(var listItem in sportzTagList.tags) {
+                <li><a href="#">@listItem.title</a></li>
             }
         }
 </ul>
