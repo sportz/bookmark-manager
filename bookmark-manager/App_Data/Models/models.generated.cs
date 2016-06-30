@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.3")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -124,6 +124,15 @@ namespace Umbraco.Web.PublishedContentModels
 		public object MemberId
 		{
 			get { return this.GetPropertyValue("memberId"); }
+		}
+
+		///<summary>
+		/// tagss
+		///</summary>
+		[ImplementPropertyType("tagss")]
+		public Newtonsoft.Json.Linq.JToken Tagss
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("tagss"); }
 		}
 	}
 

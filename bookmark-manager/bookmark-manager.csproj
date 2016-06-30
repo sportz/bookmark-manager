@@ -322,6 +322,10 @@
     <Content Include="App_Data\NuGetBackup\20160623-103415\Config\Lang\zh-CN.user.xml" />
     <Content Include="App_Data\TEMP\ClientDependency\DESKTOP-PLCKIVJ-7903b6a420d3b1ff41dbe0b1dd6872eb-map.xml" />
     <Content Include="App_Data\TEMP\DistCache\DESKTOP-PLCKIVJ\LMW3SVC2ROOT-lastsynced.txt" />
+    <Content Include="App_Plugins\ColoredTags\ColoredTag.editor.html" />
+    <Content Include="App_Plugins\ColoredTags\ColoredTags.controller.js" />
+    <Content Include="App_Plugins\ColoredTags\ColoredTags.editor.html" />
+    <Content Include="App_Plugins\ColoredTags\ColoredTag.controller.js" />
     <Content Include="bin\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
     <Content Include="bin\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
     <Content Include="bin\amd64\sqlceca40.dll" />
@@ -461,6 +465,7 @@
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Plugins\ColoredTags\package.manifest" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
