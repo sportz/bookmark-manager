@@ -12,6 +12,43 @@
 
     <ul class="sidebar-list">
         <li><a href="/bookmarks">All Bookmarks</a></li>
-        <!-- TODO Tag-Liste -->
-    </ul>
+        
+        @{
+            var bookmarksRootAlias = "bookmarks";
+            var memberIdAlias = "memberId";
+
+            var cs = ApplicationContext.Services.ContentService;
+            var rootNodes = cs.GetRootContent();
+            var bookmarks = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
+            var userBookmarks = bookmarks.Children().Where(x => x.GetValue
+            <int>
+                (memberIdAlias) == Members.GetCurrentMemberId()).First();
+
+            var tagList = new List<string>();
+
+            foreach (var bookmark in userBookmarks.Children())
+            {
+                var tagsString = bookmark.GetValue<string>("tags");
+                string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (bookmarkTagList != null && bookmarkTagList.Length > 0)
+                {
+                    foreach (var tag in bookmarkTagList)
+                    {
+                        if (!tagList.Contains(tag))
+                        {
+                            tagList.Add(tag);
+                        }
+                    }
+                }
+            }
+
+            tagList.Sort();
+
+            foreach (var tag in tagList)
+            {
+                <li><a href="#">@tag</a></li>
+            }
+        }
+</ul>
 </div>
