@@ -1,8 +1,13 @@
 ﻿@using ContentModels = Umbraco.Web.PublishedContentModels;
 @inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.Bookmark>
 @{
-    Layout = null;
-
+	Layout = "Master.cshtml";
 }
 
-<h1>Hallo Welt</h1>
+@if (!library.IsLoggedOn())
+{
+    Response.Redirect("/");
+    return;
+}
+
+@CurrentPage.GetGridHtml("layout")

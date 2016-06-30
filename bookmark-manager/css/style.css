@@ -2876,26 +2876,31 @@ select[multiple].input-lg,
 .has-warning .form-control-feedback {
   color: #8a6d3b; }
 
-.has-error .help-block,
+.has-error .help-block, .input-validation-error .help-block,
 .has-error .control-label,
+.input-validation-error .control-label,
 .has-error .radio,
+.input-validation-error .radio,
 .has-error .checkbox,
+.input-validation-error .checkbox,
 .has-error .radio-inline,
-.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+.input-validation-error .radio-inline,
+.has-error .checkbox-inline,
+.input-validation-error .checkbox-inline, .has-error.radio label, .radio.input-validation-error label, .has-error.checkbox label, .checkbox.input-validation-error label, .has-error.radio-inline label, .radio-inline.input-validation-error label, .has-error.checkbox-inline label, .checkbox-inline.input-validation-error label {
   color: #ffffff; }
-.has-error .form-control {
+.has-error .form-control, .input-validation-error .form-control {
   border-color: #ffffff;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
-  .has-error .form-control:focus {
+  .has-error .form-control:focus, .input-validation-error .form-control:focus {
     border-color: #e6e6e6;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px white; }
-.has-error .input-group-addon {
+.has-error .input-group-addon, .input-validation-error .input-group-addon {
   color: #ffffff;
   border-color: #ffffff;
   background-color: #e74c3c; }
-.has-error .form-control-feedback {
+.has-error .form-control-feedback, .input-validation-error .form-control-feedback {
   color: #ffffff; }
 
 .has-feedback label ~ .form-control-feedback {
@@ -6084,8 +6089,11 @@ table {
   width: 100%; }
 
 /* =============================================================================================
- * Rails messages
+ * Messages and Validation
  * ============================================================================================= */
+.field-validation-error {
+  color: #e74c3c; }
+
 #notice {
   border-radius: 0;
   border-width: 1px 0;
@@ -6166,12 +6174,9 @@ table {
 /* =============================================================================================
  * Forms
  * ============================================================================================= */
-form > .actions {
-  text-align: center; }
-  @media (min-width: 768px) {
-    form > .actions {
-      text-align: right; } }
-  form > .actions .btn, form > .actions input[type=submit], form > .actions .button-back {
+.actions {
+  text-align: right; }
+  .actions .btn, .actions input[type=submit], .actions .button-back {
     margin-bottom: 5px; }
 
 input[type=submit] {
@@ -6180,26 +6185,31 @@ input[type=submit] {
 .button-back {
   margin-bottom: 5px; }
 
-.has-error .help-block,
+.has-error .help-block, .input-validation-error .help-block,
 .has-error .control-label,
+.input-validation-error .control-label,
 .has-error .radio,
+.input-validation-error .radio,
 .has-error .checkbox,
+.input-validation-error .checkbox,
 .has-error .radio-inline,
-.has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+.input-validation-error .radio-inline,
+.has-error .checkbox-inline,
+.input-validation-error .checkbox-inline, .has-error.radio label, .radio.input-validation-error label, .has-error.checkbox label, .checkbox.input-validation-error label, .has-error.radio-inline label, .radio-inline.input-validation-error label, .has-error.checkbox-inline label, .checkbox-inline.input-validation-error label {
   color: #e74c3c; }
-.has-error .form-control {
+.has-error .form-control, .input-validation-error .form-control {
   border-color: #e74c3c;
   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075); }
-  .has-error .form-control:focus {
+  .has-error .form-control:focus, .input-validation-error .form-control:focus {
     border-color: #d62c1a;
     -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f29f97;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 6px #f29f97; }
-.has-error .input-group-addon {
+.has-error .input-group-addon, .input-validation-error .input-group-addon {
   color: #e74c3c;
   border-color: #e74c3c;
   background-color: #ffffff; }
-.has-error .form-control-feedback {
+.has-error .form-control-feedback, .input-validation-error .form-control-feedback {
   color: #e74c3c; }
 
 .content-form {
@@ -6233,6 +6243,7 @@ input[type=submit] {
       margin: 0; } }
 
 .content-landing {
+  margin-bottom: 30px;
   padding: 60px;
   text-align: center; }
   .content-landing h1 {
@@ -6242,17 +6253,6 @@ input[type=submit] {
       color: #e74c3c; }
   .content-landing p {
     font-size: 17px; }
-
-.content-landing-form-wrapper {
-  position: relative;
-  min-height: 1px;
-  padding-left: 15px;
-  padding-right: 15px;
-  margin-top: 30px; }
-  @media (min-width: 768px) {
-    .content-landing-form-wrapper {
-      float: left;
-      width: 50%; } }
 
 .bookmark-list {
   margin: 0; }

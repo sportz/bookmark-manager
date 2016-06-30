@@ -2,75 +2,71 @@
  * General
  * ============================================================================================= */
 
-body
-{
-  background-attachment: fixed;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding: ($navbar-height * 1.7) 0;
+body {
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: ($navbar-height * 1.7) 0;
 
-  @media (min-width: $screen-sm-min) {
-    padding-left: $navbar-height;  
-    padding-right: $navbar-height;  
-  }
+    @media (min-width: $screen-sm-min) {
+        padding-left: $navbar-height;
+        padding-right: $navbar-height;
+    }
 }
 
-a
-{
-  transition: background-color 0.3s ease,
-              color 0.3s ease;
+a {
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-main
-{
-  padding: 0;
+main {
+    padding: 0;
 }
 
-table
-{
-  @extend .table;
-
-  width: 100%;
+table {
+    @extend .table;
+    width: 100%;
 }
 
 
 /* =============================================================================================
- * Rails messages
+ * Messages and Validation
  * ============================================================================================= */
 
-#notice
-{
-  @extend .alert;
-  @extend .alert-info;
-
-  border-radius: 0;
-  border-width: 1px 0;
-  max-width: ($content-width - $grid-gutter-width);
-  margin-left: auto;
-  margin-right: auto;
-
-  @media (min-width: $screen-sm-min)
-  {
-    border-radius: $border-radius-base;
-    border-width: 1px;
-  }
+.field-validation-error {
+    color: $brand-danger;
 }
 
-#error_explanation
-{
-  @extend .alert;
-  @extend .alert-danger;
+.input-validation-error {
+    @extend .has-error;
+}
 
-  max-width: ($content-width - $grid-gutter-width);
-  margin-left: auto;
-  margin-right: auto;
+#notice {
+    @extend .alert;
+    @extend .alert-info;
+    border-radius: 0;
+    border-width: 1px 0;
+    max-width: ($content-width - $grid-gutter-width);
+    margin-left: auto;
+    margin-right: auto;
 
-  h2
-  {
-    margin-top: 0;
-    font-size: $font-size-large;
-  }
+    @media (min-width: $screen-sm-min) {
+        border-radius: $border-radius-base;
+        border-width: 1px;
+    }
+}
+
+#error_explanation {
+    @extend .alert;
+    @extend .alert-danger;
+    max-width: ($content-width - $grid-gutter-width);
+    margin-left: auto;
+    margin-right: auto;
+
+    h2 {
+        margin-top: 0;
+        font-size: $font-size-large;
+    }
 }
 
 
@@ -78,82 +74,66 @@ table
  * Containers
  * ============================================================================================= */
 
-.content
-{
-  border-radius: $border-radius-base;
-  overflow: hidden;
+.content {
+    border-radius: $border-radius-base;
+    overflow: hidden;
 }
 
-.content-default-wrapper
-{
-  @include make-xs-column(12);
+.content-default-wrapper {
+    @include make-xs-column(12);
+    float: none;
 
-  float: none;
-
-  @media (min-width: $screen-sm-min)
-  {
-    float: left;
-  }
-}
-
-.content-default
-{
-  @extend .content;
-
-  background-color: $content-background;
-  border-radius: $border-radius-base;
-  padding: 30px;
-
-  h1
-  {
-    margin-top: 0;
-    margin-bottom: 30px;
-  }
-}
-
-.sidebar-wrapper
-{
-  @include make-sm-column(4);
-
-  margin-bottom: 30px;
-}
-
-.sidebar
-{
-  @extend .content;
-}
-
-.sidebar-list
-{
-  @extend .nav;
-  @extend .nav-pills;
-  @extend .nav-stacked;
-
-  li:first-child > a
-  {
-    border-radius: 0;
-  }
-
-  li + li
-  {
-    margin-top: 1px;
-  }
-
-  li > a
-  {
-    background-color: $content-background;
-    border-radius: 0;
-
-    &:hover
-    {
-      background-color: $content-hover-background;
+    @media (min-width: $screen-sm-min) {
+        float: left;
     }
-  }
 }
 
-.content-sidebar-wrapper
-{
-  @include make-sm-column(8);
+.content-default {
+    @extend .content;
+    background-color: $content-background;
+    border-radius: $border-radius-base;
+    padding: 30px;
+
+    h1 {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+}
+
+.sidebar-wrapper {
+    @include make-sm-column(4);
+    margin-bottom: 30px;
+}
+
+.sidebar {
+    @extend .content;
+}
+
+.sidebar-list {
+    @extend .nav;
+    @extend .nav-pills;
+    @extend .nav-stacked;
+
+    li:first-child > a {
+        border-radius: 0;
+    }
+
+    li + li {
+        margin-top: 1px;
+    }
+
+    li > a {
+        background-color: $content-background;
+        border-radius: 0;
+
+        &:hover {
+            background-color: $content-hover-background;
+        }
+    }
+}
+
+.content-sidebar-wrapper {
+    @include make-sm-column(8);
 }
 
 
@@ -161,53 +141,38 @@ table
  * Forms
  * ============================================================================================= */
 
-form > .actions
-{
-  text-align: center;
-
-  @media(min-width: $screen-sm-min)
-  {
+.actions {
     text-align: right;
-  }
 
-  .btn
-  {
+    .btn {
+        margin-bottom: 5px;
+    }
+}
+
+input[type=submit] {
+    @extend .btn;
+    @extend .btn-primary;
     margin-bottom: 5px;
-  }
+
+    &.button-delete-account {
+        @extend .btn-danger;
+    }
 }
 
-input[type=submit]
-{
-  @extend .btn;
-  @extend .btn-primary;
-
-  margin-bottom: 5px;
-
-  &.button-delete-account
-  {
-    @extend .btn-danger;
-  }
+.button-back {
+    @extend .btn;
+    @extend .btn-default;
+    margin-bottom: 5px;
 }
 
-.button-back
-{
-  @extend .btn;
-  @extend .btn-default;
-
-  margin-bottom: 5px;
+.has-error {
+    @include form-control-validation($brand-danger, $brand-danger, #ffffff);
 }
 
-.has-error
-{
-  @include form-control-validation($brand-danger, $brand-danger, #ffffff);
-}
-
-.content-form
-{
-  @extend .content-default;
-
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+.content-form {
+    @extend .content-default;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 
@@ -215,51 +180,41 @@ input[type=submit]
  * Navigations
  * ============================================================================================= */
 
-.toolbar
-{
-  @extend .navbar;
-  @extend .navbar-default;
+.toolbar {
+    @extend .navbar;
+    @extend .navbar-default;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-bottom: 1px;
 
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-bottom: 1px;
-
-  .navbar-right
-  {
-    margin-right: 0;
-  }
-
-  .nav
-  {
-    li
-    {
-      display: inline-block;
+    .navbar-right {
+        margin-right: 0;
     }
-  }
+
+    .nav {
+        li {
+            display: inline-block;
+        }
+    }
 }
 
-.header
-{
-  @extend .navbar;
-  @extend .navbar-fixed-top;
-  @extend .navbar-default;
+.header {
+    @extend .navbar;
+    @extend .navbar-fixed-top;
+    @extend .navbar-default;
+    background-color: $color-lighter;
 
-  background-color: $color-lighter;
-
-  @media (min-width: $screen-sm-min)
-  {
-    background-color: $content-background;
-  }
+    @media (min-width: $screen-sm-min) {
+        background-color: $content-background;
+    }
 }
 
-.header-label 
-{
-  margin-left: 5px;
-  display: inline-block ;
+.header-label {
+    margin-left: 5px;
+    display: inline-block;
 
-  @media (min-width: $screen-sm-min) 
-  {
-    display: none;
-    margin: 0;
-  }
+    @media (min-width: $screen-sm-min) {
+        display: none;
+        margin: 0;
+    }
 }

@@ -55,11 +55,11 @@
 }
 else
 {
+    <h1>Register Member</h1>
+
     using (Html.BeginUmbracoForm<UmbRegisterController>("HandleRegisterMember"))
     {
         <fieldset>
-            <legend>Register Member</legend>
-
             @Html.ValidationSummary("registerModel", true)
 
             <div class="form-group">
@@ -105,7 +105,9 @@ else
             @Html.HiddenFor(m => registerModel.RedirectUrl)
             @Html.HiddenFor(m => registerModel.UsernameIsEmail)
 
-            <button class="btn btn-primary">Register</button>
+            <div class="actions">
+                <button class="btn btn-primary">Register</button>
+            </div>
         </fieldset>
     }
 }
