@@ -59,7 +59,7 @@ Dabei können die Makros jeweils frei in einem Grid-Layout angeordnet werden.
 
 ## Zugriff / Member-Bereich ##
 
-* Es muss eine Member-Gruppe "BookmarksUser" angelegt werden
+* Es muss eine Member-Gruppe `BookmarksUser` angelegt werden
 * Die jeweiligen Content-Nodes müssen über Public Access der Gruppe zugeordnet werden
 * Neue Member werden automatisch der Member-Gruppe zugeordnet
 

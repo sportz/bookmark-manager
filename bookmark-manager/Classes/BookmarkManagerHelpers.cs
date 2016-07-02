@@ -9,14 +9,14 @@ namespace bookmark_manager.Classes
 {
     public static class BookmarkManagerHelpers
     {
-        public const string BOOKMARKS_ROOT = "bookmarks";
+        public const string BOOKMARKS_ROOT = "memberList";
         public const string BOOKMARK = "bookmark";
         public const string BOOKMARK_FORM = "bookmarkForm";
-        public const string BOOKMARKS_MEMBER = "bookmarksMember";
-        public const string LANDING_PAGE = "landingPage";
+        public const string BOOKMARKS_MEMBER = "memberNode";
+//        public const string LANDING_PAGE = "landingPage";
         public const string ROOT = "bookmarkManager";
         public const string MEMBER_SETTINGS = "memberSettings";
-        public const string TAG_RULE_FORM = "tagForm";
+        public const string TAG_RULE_FORM = "tagRuleForm";
 
         public const string MEMBER_ID_ALIAS = "memberId";
         public const string TAG_ALIAS = "tags";
