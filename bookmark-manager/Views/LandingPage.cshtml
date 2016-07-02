@@ -1,12 +1,16 @@
 ﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage<ContentModels.LandingPage>
 @using ContentModels = Umbraco.Web.PublishedContentModels;
+@using bookmark_manager.Classes;
+
 @{
 	Layout = "Master.cshtml";
 }
 
 @if (library.IsLoggedOn())
 {
-    Response.Redirect("/bookmarks");
+    // Redirect user to bookmarks if he is logged on
+    var bookmarksUrl = Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+    Response.Redirect(bookmarksUrl);
     return;
 }
 

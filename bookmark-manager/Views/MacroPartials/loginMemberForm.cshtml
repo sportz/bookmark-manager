@@ -1,17 +1,17 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
-
 @using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using Umbraco.Web.Models
 @using Umbraco.Web.Controllers
+@using bookmark_manager.Classes;
 
 @{
     var loginModel = new LoginModel();
 
-    // TODO URL mit Code bestimmen statt hardcoden?
-    loginModel.RedirectUrl = "/bookmarks";
+    var bookmarkUrl = Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+    loginModel.RedirectUrl = bookmarkUrl;
     
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();

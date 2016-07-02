@@ -1,40 +1,16 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
-
 @using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using Umbraco.Web.Controllers
+@using bookmark_manager.Classes;
 
 @{
-    @*
-        You can specify a custom member type alias in the constructor, the default is 'Member'
-        for example, to use 'Custom Member' you'd use this syntax:
-
-        var registerModel = Members.CreateRegistrationModel("Custom Member");
-    *@
-
     var registerModel = Members.CreateRegistrationModel();
 
-    // TODO URL mit Code bestimmen statt hardcoden?
-    registerModel.RedirectUrl = "/bookmarks";
-
-    @*
-        Configurable here:
-
-        registerModel.RedirectUrl       - Optional. What path to redirect to if registration is successful.
-                                          By default the member will be redirected to the current umbraco page
-                                          unless this is specified.
-
-        registerModel.UsernameIsEmail   - the default is true
-                                          if you want the username to be different from the email
-                                          address, set this to true and add a new Username field in
-                                          the form below
-
-                                          @Html.LabelFor(m => registerModel.Username)
-                                          @Html.TextBoxFor(m => registerModel.Username)
-                                          @Html.ValidationMessageFor(m => registerModel.Username)
-    *@
+    var bookmarkUrl = Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+    registerModel.RedirectUrl = bookmarkUrl;
 
     Html.EnableClientValidation();
     Html.EnableUnobtrusiveJavaScript();
@@ -82,22 +58,12 @@ else
 
             @if (registerModel.MemberProperties != null)
             {
-                @*
-                    It will only displays properties marked as "Member can edit" on the "Info" tab of the Member Type.
-                *@
-            for (var i = 0; i < registerModel.MemberProperties.Count; i++)
-            {
-                @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
-                @*
-                    By default this will render a textbox but if you want to change the editor template for this property you can
-                    easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
-                    create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to
-                    render your specific editor template like:
-                    @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
-                *@
-                @Html.EditorFor(m => registerModel.MemberProperties[i].Value)
-                @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
-                <br />
+                for (var i = 0; i < registerModel.MemberProperties.Count; i++)
+                {
+                    @Html.LabelFor(m => registerModel.MemberProperties[i].Value, registerModel.MemberProperties[i].Name)
+                    @Html.EditorFor(m => registerModel.MemberProperties[i].Value)
+                    @Html.HiddenFor(m => registerModel.MemberProperties[i].Alias)
+                    <br />
                 }
             }
 

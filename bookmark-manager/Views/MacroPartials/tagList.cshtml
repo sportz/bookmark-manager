@@ -1,12 +1,37 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
-@using Newtonsoft.Json
+
 @using bookmark_manager.Classes;
+
+@{ 
+    var bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
+    var tagList = new List<string>();
+
+    // Create a list containing every tag used in the bookmarks exactly once
+    foreach (var bookmark in bookmarks)
+    {
+        var tagsString = bookmark.GetValue<string>(BookmarkManagerHelpers.TAG_RULES_ALIAS);
+        string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+        if (bookmarkTagList != null && bookmarkTagList.Length > 0)
+        {
+            foreach (var tag in bookmarkTagList)
+            {
+                if (!tagList.Contains(tag))
+                {
+                    tagList.Add(tag);
+                }
+            }
+        }
+    }
+
+    tagList.Sort();
+}
 
 <div class="sidebar">
     <div class="toolbar">
         <span class="navbar-brand">Tags</span>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.TAG_RULE_FORM))">
+            <li><a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.TAG_RULE_FORM))">
                 <span class="glyphicon glyphicon-edit"></span>
             </a></li>
         </ul>
@@ -16,31 +41,9 @@
         <li><a href="/bookmarks"><strong>All Bookmarks</strong></a></li>
         
         @{
-            var bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
-            var tagList = new List<string>();
-
-            foreach (var bookmark in bookmarks)
-            {
-                var tagsString = bookmark.GetValue<string>(BookmarkManagerHelpers.TAG_ALIAS);
-                string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (bookmarkTagList != null && bookmarkTagList.Length > 0)
-                {
-                    foreach (var tag in bookmarkTagList)
-                    {
-                        if (!tagList.Contains(tag))
-                        {
-                            tagList.Add(tag);
-                        }
-                    }
-                }
-            }
-
-            tagList.Sort();
-
             foreach (var tag in tagList)
             {
-                var tagUrlBase = Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+                var tagUrlBase = Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
                 var tagUrl = string.Format("{0}?tag={1}", tagUrlBase, tag);
                 <li><a href="@tagUrl">@tag</a></li>
             }

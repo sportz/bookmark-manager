@@ -1,14 +1,15 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
-@using umbraco.cms.businesslogic.member;
-@using ContentModels = Umbraco.Web.PublishedContentModels;
+
 @using bookmark_manager.Classes;
+
 @{
     Layout = null;
 
     IEnumerable<IContent> bookmarks;
     string title = "All Bookmarks";
-    var tagParam = Request.Params["tag"];
 
+    // Get all bookmarks or all bookmarks that have the specified tag
+    var tagParam = Request.Params["tag"];
     if (tagParam == null)
     {
         bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
@@ -18,7 +19,6 @@
         title = tagParam;
         bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
     }
-
 }
 
 <div class="content">
@@ -28,7 +28,7 @@
         </a>  
         <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
+                <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARK_FORM))">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </li>

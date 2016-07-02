@@ -5,11 +5,17 @@ using System.Web;
 using System.Web.Mvc;
 using Umbraco.Web.Mvc;
 
-namespace bookmark_manager.Controllers {
-    public class MemberSettingsController : SurfaceController {
+namespace bookmark_manager.Controllers
+{
+    public class MemberSettingsController : SurfaceController
+    {
+        /// <summary>
+        /// Delete the member.
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult HandleMemberDelete() {
-
+        public ActionResult HandleMemberDelete()
+        {
             var memberService = ApplicationContext.Services.MemberService;
             var memberId = Members.GetCurrentMemberId();
             var currentMember = memberService.GetById(memberId);
