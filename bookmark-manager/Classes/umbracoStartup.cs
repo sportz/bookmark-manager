@@ -16,10 +16,12 @@ namespace bookmark_manager.Classes {
 
             // EventHandler registieren
             MemberService.Created += createUserBookmarkNodeAfterRegister;
+            MemberService.Created += addMemberToGroup;
 
             // TODO Eventhandler wenn Member gelöscht wird
             MemberService.Deleting += deleteUserBookmarkContent;
         }
+
 
 
         public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
@@ -79,5 +81,11 @@ namespace bookmark_manager.Classes {
             contentService.Delete(userBookmarks);
         }
 
+        private void addMemberToGroup(IMemberService sender, NewEventArgs<IMember> e) {
+            var bookmarksUserGroupAlias = "BookmarksUser";
+
+            var memberId = e.Entity.Id;
+            sender.AssignRole(memberId, bookmarksUserGroupAlias);
+        }
     }
 }
