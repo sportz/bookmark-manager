@@ -6,44 +6,38 @@
     Layout = null;
 }
 
-else
-{
-    <div class="content">
-        <div class="toolbar">
-            <a class="navbar-brand" href="#">
-                <!-- TODO Tag name -->
-                All Bookmarks
-            </a>  
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <ul class="bookmark-list">
-            @{
-                IEnumerable<IContent> bookmarks;
-                var tagParam = Request.Params["tag"];
-
-                if (tagParam == null)
-                {
-                    bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
-                }
-                else
-                {
-                    bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
-                }
-                foreach (var bookmark in bookmarks)
-                {
-                    <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
-                }
-            }
+<div class="content">
+    <div class="toolbar">
+        <a class="navbar-brand" href="#">
+            <!-- TODO Tag name -->
+            All Bookmarks
+        </a>  
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </li>
         </ul>
     </div>
-}
 
+    <ul class="bookmark-list">
+        @{
+            IEnumerable<IContent> bookmarks;
+            var tagParam = Request.Params["tag"];
 
-
+            if (tagParam == null)
+            {
+                bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
+            }
+            else
+            {
+                bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
+            }
+            foreach (var bookmark in bookmarks)
+            {
+                <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
+            }
+        }
+    </ul>
+</div>

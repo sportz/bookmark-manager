@@ -7,7 +7,7 @@ using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
 
 
 // FILE: models.generated.cs
@@ -264,16 +264,16 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>bookmarksManagerLayout</summary>
-	[PublishedContentModel("bookmarksManagerLayout")]
-	public partial class BookmarksManagerLayout : PublishedContentModel
+	/// <summary>Member Settings</summary>
+	[PublishedContentModel("memberSettings")]
+	public partial class MemberSettings : PublishedContentModel
 	{
 #pragma warning disable 0109 // new is redundant
-		public new const string ModelTypeAlias = "bookmarksManagerLayout";
+		public new const string ModelTypeAlias = "memberSettings";
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 #pragma warning restore 0109
 
-		public BookmarksManagerLayout(IPublishedContent content)
+		public MemberSettings(IPublishedContent content)
 			: base(content)
 		{ }
 
@@ -284,9 +284,18 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 #pragma warning restore 0109
 
-		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BookmarksManagerLayout, TValue>> selector)
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<MemberSettings, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// layout
+		///</summary>
+		[ImplementPropertyType("layou")]
+		public Newtonsoft.Json.Linq.JToken Layou
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layou"); }
 		}
 	}
 

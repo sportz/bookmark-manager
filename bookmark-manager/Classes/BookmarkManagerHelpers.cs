@@ -15,7 +15,8 @@ namespace bookmark_manager.Classes
         public const string BOOKMARKS_MEMBER = "bookmarksMember";
         public const string LANDING_PAGE = "landingPage";
 
-        private const string MEMBER_ID_ALIAS = "memberId";
+        public const string MEMBER_ID_ALIAS = "memberId";
+        public const string TAG_ALIAS = "tags";
         
         public static int GetIdOfFirstRootContentNode(string contentTypeAlias)
         {

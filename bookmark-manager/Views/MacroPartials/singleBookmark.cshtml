@@ -34,32 +34,35 @@
 <div class="bookmark-favicon">
     <img src="@favIconUrl" />
 </div>
-<!-- Title and URL -->
+
 <div class="bookmark-content">
+
+    <!-- Title and URL -->
     <a href="@link" alt="@title">
-        <h1>
-            @title
-        </h1>
+        <h1>@title</h1>
         <p>@link</p>
     </a>
+
     <!-- Tags-->
     @if (bookmarkTag[0] != "")
     {
         <div class="bookmark-tags">
             @{
-                foreach (var tagName in bookmarkTag)
+                foreach (var tag in bookmarkTag)
                 {
                     string tagColor = "default";
                     foreach (var coloredTag in coloredTagList.tags)
                     {
-                        if (coloredTag.title == tagName)
+                        if (coloredTag.title == tag)
                         {
                             tagColor = coloredTag.color;
                         }
                     }
-                    // TODO Link-Adresse
-                    <a href="#">
-                        <span class="label label-@tagColor">@tagName</span>
+
+                    var tagUrlBase = Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+                    var tagUrl = string.Format("{0}?tag={1}", tagUrlBase, tag);
+                    <a href="@tagUrl">
+                        <span class="label label-@tagColor">@tag</span>
                     </a>
                 }
             }
@@ -69,14 +72,11 @@
 
 <!-- Edit -->
 <div class="bookmark-action">
-    <!-- TODO Link/Controller action -->
     <a href="@editUrl"><span class="glyphicon glyphicon-edit"></span></a>
 </div>
 
 <!-- Delete -->
 <div class="bookmark-action">
-    <!-- TODO Link/controller action -->
-    <!-- TODO Confirmation -->
     <a href="@Url.SurfaceAction("HandleBookmarkDelete", "Bookmark", new { id = bookmarkId.Result })">
         <span class="glyphicon glyphicon-trash"></span>
     </a>
