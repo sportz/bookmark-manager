@@ -8,44 +8,34 @@ using Umbraco.Core.Events;
 using Umbraco.Core.Models;
 using Umbraco.Core.Services;
 
-namespace bookmark_manager.Classes {
-    public class umbracoStartup : IApplicationEventHandler {
-
-        public void OnApplicationInitialized(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
-            //throw new NotImplementedException();
-
-            // EventHandler registieren
+namespace bookmark_manager.Classes
+{
+    public class umbracoStartup : IApplicationEventHandler
+    {
+        public void OnApplicationInitialized(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        {
+            // register EventHandlers registieren
             MemberService.Created += createUserBookmarkNodeAfterRegister;
             MemberService.Created += addMemberToGroup;
-
-            // TODO Eventhandler wenn Member gelöscht wird
             MemberService.Deleting += deleteUserBookmarkContent;
         }
 
+        public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        {}
 
+        public void OnApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext)
+        {}
 
-        public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
-            //throw new NotImplementedException();
-        }
-
-        public void OnApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
-            //throw new NotImplementedException();
-
-        }
-
+        /// <summary>
+        /// Creates a node for every newly registered user.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void createUserBookmarkNodeAfterRegister(IMemberService sender, NewEventArgs<IMember> e)
         {
-            // Type of the subnode to create
-            var bookmarksRootAlias = "bookmarks";
-            var bookmarksMemberAlias = "bookmarksMember";
-
-            // Property Names
-            var memberIdAlias = "memberId";
-            var tagsAlias = "tags";
-
-
             // Empty Tags
             var tagsContent = "{\r\n  \"tags\": [\r\n  ]\r\n}";
+
             // User information
             var memberName = e.Entity.Name;
             var memberId = e.Entity.Id;
@@ -53,25 +43,22 @@ namespace bookmark_manager.Classes {
             var contentService = ApplicationContext.Current.Services.ContentService;
 
             // Get the root node for the bookmarks
-            IEnumerable<IContent> rootNodes = contentService.GetRootContent();
-            IContent bookmarksRoot;
-            try {
-                bookmarksRoot = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
-            }
-            catch (System.Exception error){
-                bookmarksRoot = contentService.CreateContent("Bookmarks Root", -1, bookmarksRootAlias);
-                contentService.Save(bookmarksRoot);
-            }
+            var bookmarksRoot = BookmarkManagerHelpers.GetFirstNodeForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT);
 
             // Create the BookmarksMember Content Node and assign values for memberId and Taglist
-            IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, bookmarksMemberAlias, memberId);
-            userBookmarksNode.SetValue(memberIdAlias, memberId);
-            userBookmarksNode.SetValue(tagsAlias, tagsContent);
+            IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, BookmarkManagerHelpers.BOOKMARKS_MEMBER, memberId);
+            userBookmarksNode.SetValue(BookmarkManagerHelpers.MEMBER_ID_ALIAS, memberId);
+            userBookmarksNode.SetValue(BookmarkManagerHelpers.TAG_RULES_ALIAS, tagsContent);
             contentService.Save(userBookmarksNode);
         }
 
-        private void deleteUserBookmarkContent(IMemberService sender, DeleteEventArgs<IMember> e) {
-
+        /// <summary>
+        /// Delete all bookmarks of the member that will be deleted
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void deleteUserBookmarkContent(IMemberService sender, DeleteEventArgs<IMember> e)
+        {
             var contentService = ApplicationContext.Current.Services.ContentService;
 
             var member = e.DeletedEntities.First();
@@ -81,7 +68,13 @@ namespace bookmark_manager.Classes {
             contentService.Delete(userBookmarks);
         }
 
-        private void addMemberToGroup(IMemberService sender, NewEventArgs<IMember> e) {
+        /// <summary>
+        /// Add member to BookmarksUser group so he can access the coressponding pages
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addMemberToGroup(IMemberService sender, NewEventArgs<IMember> e)
+        {
             var bookmarksUserGroupAlias = "BookmarksUser";
 
             var memberId = e.Entity.Id;

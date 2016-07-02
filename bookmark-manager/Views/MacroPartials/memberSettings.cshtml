@@ -1,12 +1,10 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 
-
 @using System.Web.Mvc.Html
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using Umbraco.Web.Controllers
 @using bookmark_manager.Controllers
-@using bookmark_manager.Models
 
 @{
     var profileModel = Members.GetCurrentMemberProfileModel();
@@ -50,15 +48,9 @@
             </div>
           
             <div class="form-group">
-                @for (var i = 0; i < profileModel.MemberProperties.Count; i++) {
+                @for (var i = 0; i < profileModel.MemberProperties.Count; i++)
+                {
                     @Html.LabelFor(m => profileModel.MemberProperties[i].Value, profileModel.MemberProperties[i].Name)
-                    @*
-            By default this will render a textbox but if you want to change the editor template for this property you can
-            easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
-            create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to
-            render your specific editor template like:
-            @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
-                    *@
                     @Html.EditorFor(m => profileModel.MemberProperties[i].Value)
                     @Html.HiddenFor(m => profileModel.MemberProperties[i].Alias)
                     <br />
@@ -68,7 +60,8 @@
                 <button class="btn btn-primary">Save</button>
             </div>
         </fieldset>
-    }      
+    }   
+       
     <hr />
     <h1>Cancel my account</h1>
     <p>Once you delete your account all data is lost and cannot be restored!</p>

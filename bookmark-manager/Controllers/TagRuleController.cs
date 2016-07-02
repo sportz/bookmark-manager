@@ -15,16 +15,21 @@ namespace bookmark_manager.Controllers
 {
     public class TagRuleController : SurfaceController
     {
+        /// <summary>
+        /// Create a new rule to color tags based on the model. Existing rules for the same tag will be overwritten.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult HandleFormSubmit(TagRuleModel model)
         {
+            // Cancel if model is invalid
             if (!ModelState.IsValid)
                 return CurrentUmbracoPage();
 
-            var userNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
-
-            // Get user node and tag rules
-            var ruleSet = getRuleSetFromUser(userNode);
+            // Get member node and tag rules
+            var memberNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
+            var ruleSet = getRuleSetFromUser(memberNode);
             var rules = ruleSet.Tables["tags"];
 
             // Replace existing rules (if any)
@@ -55,19 +60,22 @@ namespace bookmark_manager.Controllers
             var result = JsonConvert.SerializeObject(ruleSet);
 
             // Save
-            userNode.SetValue(BookmarkManagerHelpers.TAG_ALIAS, result);
-            ApplicationContext.Services.ContentService.Save(userNode);
+            memberNode.SetValue(BookmarkManagerHelpers.TAG_RULES_ALIAS, result);
+            ApplicationContext.Services.ContentService.Save(memberNode);
 
             return CurrentUmbracoPage();
         }
 
+        /// <summary>
+        /// Delete tag color rule.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult HandleDeleteTag()
         {
-            var userNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
-
-            // Get user node and tag rules
-            var ruleSet = getRuleSetFromUser(userNode);
+            // Get member node and tag rules
+            var memberNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
+            var ruleSet = getRuleSetFromUser(memberNode);
             var rules = ruleSet.Tables["tags"];
 
             // Find and delete rule
@@ -89,15 +97,20 @@ namespace bookmark_manager.Controllers
             var result = JsonConvert.SerializeObject(ruleSet);
 
             // Save
-            userNode.SetValue(BookmarkManagerHelpers.TAG_ALIAS, result);
-            ApplicationContext.Services.ContentService.Save(userNode);
+            memberNode.SetValue(BookmarkManagerHelpers.TAG_RULES_ALIAS, result);
+            ApplicationContext.Services.ContentService.Save(memberNode);
 
-            return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.TAG_RULE_FORM));
+            return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.TAG_RULE_FORM));
         }
 
+        /// <summary>
+        /// Helper method returning all tag coloring rules stored for the current member.
+        /// </summary>
+        /// <param name="userNode"></param>
+        /// <returns></returns>
         private DataSet getRuleSetFromUser(IContent userNode)
         {
-            var json = userNode.GetValue<string>(BookmarkManagerHelpers.TAG_ALIAS).Replace("&quot;", "\"");
+            var json = userNode.GetValue<string>(BookmarkManagerHelpers.TAG_RULES_ALIAS).Replace("&quot;", "\"");
 
             DataSet ruleSet = JsonConvert.DeserializeObject<DataSet>(json);
             DataTable rules = ruleSet.Tables["tags"];

@@ -1,17 +1,21 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
 @using bookmark_manager.Models;
 
 @{
-    var bookmarkId = Request.QueryString["id"];
+    // Create empty bookmark model
     var bookmarkModel = new BookmarkFormModel();
-    var cs = ApplicationContext.Services.ContentService;
-    var bookmarkIdInt = 0;
 
+    // Get bookmark ID from URL
+    var bookmarkId = Request.QueryString["id"];
+    var bookmarkIdInt = 0;
     if (!string.IsNullOrWhiteSpace(bookmarkId))
     {
         int.TryParse(bookmarkId, out bookmarkIdInt);
     }
 
+    // Get bookmark node
+    var cs = ApplicationContext.Services.ContentService;
     var bookmarkContent = cs.GetById(bookmarkIdInt);
 
     if (bookmarkContent != null)

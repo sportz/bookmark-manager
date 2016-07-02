@@ -15,6 +15,11 @@ namespace bookmark_manager.Controllers
 {
     public class BookmarkController : SurfaceController
     {
+        /// <summary>
+        /// Edit the bookmark according to the model. If the model id is 0, a new bookmark will be created.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult HandleFormSubmit(BookmarkFormModel model)
         {
@@ -22,7 +27,7 @@ namespace bookmark_manager.Controllers
                 return CurrentUmbracoPage();
 
             var contentService = ApplicationContext.Services.ContentService;
-            
+
             IContent bookmark;
 
             if (model.id == 0)
@@ -41,15 +46,19 @@ namespace bookmark_manager.Controllers
 
             contentService.Save(bookmark);
 
-            return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+            return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
         }
 
+        /// <summary>
+        /// Delete the bookmark.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult HandleBookmarkDelete()
         {
             var id = ControllerContext.RequestContext.RouteData.Values["id"].ToString();
             int idInt;
-            
+
             if (int.TryParse(id, out idInt))
             {
                 var contentService = ApplicationContext.Services.ContentService;
@@ -57,7 +66,7 @@ namespace bookmark_manager.Controllers
 
                 contentService.Delete(bookmarkNode);
             }
-            
+
             return RedirectToCurrentUmbracoPage();
         }
     }
