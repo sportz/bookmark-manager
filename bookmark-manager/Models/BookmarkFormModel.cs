@@ -5,12 +5,10 @@ using System.Web;
 
 namespace bookmark_manager.Models
 {
-    public class BookmarkFormViewModel
+    public class BookmarkFormModel
     {
         public string title { get; set; }
         public string url { get; set; }
 
-        // TODO
-        public List<string> tags { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Routing;
 using Umbraco.Core;
 using Umbraco.Core.Events;
 using Umbraco.Core.Models;
@@ -17,12 +18,11 @@ namespace bookmark_manager.Classes {
             MemberService.Created += createUserBookmarkNodeAfterRegister;
 
             // TODO Eventhandler wenn Member gelöscht wird
-           // MemberService.Deleted += deleteUserBookmarkContent;
+            // MemberService.Deleted += deleteUserBookmarkContent;
         }
 
         public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
             //throw new NotImplementedException();
-
         }
 
         public void OnApplicationStarting(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {

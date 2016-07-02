@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -127,12 +127,12 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 
 		///<summary>
-		/// tagss
+		/// tags
 		///</summary>
-		[ImplementPropertyType("tagss")]
-		public Newtonsoft.Json.Linq.JToken Tagss
+		[ImplementPropertyType("tags")]
+		public Newtonsoft.Json.Linq.JToken Tags
 		{
-			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("tagss"); }
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("tags"); }
 		}
 	}
 
