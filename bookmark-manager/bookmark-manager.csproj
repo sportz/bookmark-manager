@@ -454,6 +454,8 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="css\bootstrap-tagsinput.css" />
+    <Content Include="css\bootstrap.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="obj\Debug\bookmark-manager.csproj.FileListAbsolute.txt" />
@@ -461,9 +463,11 @@
     <Content Include="obj\Debug\bookmark-manager.pdb" />
     <Content Include="packages.config" />
     <Content Include="App_Plugins\ModelsBuilder\package.manifest" />
+    <Content Include="Scripts\bootstrap-tagsinput.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="App_Plugins\ColoredTags\package.manifest" />
+    <Content Include="css\bootstrap.css.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -3267,6 +3271,8 @@
     <Content Include="Views\Partials\BookmarkFormView.cshtml" />
     <Content Include="Views\MemberPage.cshtml" />
     <Content Include="Views\MacroPartials\bookmarkForm.cshtml" />
+    <Content Include="Views\BookmarkForm.cshtml" />
+    <Content Include="Views\MacroPartials\memberSettings.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
