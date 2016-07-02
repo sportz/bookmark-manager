@@ -38,7 +38,11 @@ namespace bookmark_manager.Classes {
 
             // Property Names
             var memberIdAlias = "memberId";
+            var tagsAlias = "tags";
 
+
+            // Empty Tags
+            var tagsContent = "{\r\n  \"tags\": [\r\n  ]\r\n}";
             // User information
             var memberName = e.Entity.Name;
             var memberId = e.Entity.Id;
@@ -46,7 +50,6 @@ namespace bookmark_manager.Classes {
             var contentService = ApplicationContext.Current.Services.ContentService;
 
             // Get the root node for the bookmarks
-           // IContent bookmarksRoot = null;
             IEnumerable<IContent> rootNodes = contentService.GetRootContent();
             IContent bookmarksRoot;
             try {
@@ -57,15 +60,10 @@ namespace bookmark_manager.Classes {
                 contentService.SaveAndPublishWithStatus(bookmarksRoot);
             }
 
- 
-
-            // TODO besser Fehler einbauen, wenn nicht vorhanden
-            if (bookmarksRoot == null) {
-               
-            }
-
+            // Create the BookmarksMember Content Node and assign values for memberId and Taglist
             IContent userBookmarksNode = contentService.CreateContent(memberName, bookmarksRoot, bookmarksMemberAlias, memberId);
             userBookmarksNode.SetValue(memberIdAlias, memberId);
+            userBookmarksNode.SetValue(tagsAlias, tagsContent);
             contentService.Save(userBookmarksNode);
         }
     }

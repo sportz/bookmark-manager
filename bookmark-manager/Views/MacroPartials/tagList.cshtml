@@ -17,6 +17,7 @@
         @{
             var bookmarksRootAlias = "bookmarks";
             var memberIdAlias = "memberId";
+            var tagsAlias = "tags";
 
             var cs = ApplicationContext.Services.ContentService;
             var rootNodes = cs.GetRootContent();
@@ -29,7 +30,7 @@
 
             foreach (var bookmark in userBookmarks.Children())
             {
-                var tagsString = bookmark.GetValue<string>("tags");
+                var tagsString = bookmark.GetValue<string>(tagsAlias);
                 string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (bookmarkTagList != null && bookmarkTagList.Length > 0)
@@ -54,8 +55,7 @@
 
             // Hier kommen meine
             <li>Alles ab hier kommt vom Sportz</li>
-            dynamic sportzTagList = JsonConvert.DeserializeObject(userBookmarks.GetValue<string>("tagss").Replace("&quot;", "\""));
-            var haha = userBookmarks.Name;
+            dynamic sportzTagList = JsonConvert.DeserializeObject(userBookmarks.GetValue<string>(tagsAlias).Replace("&quot;", "\""));
             foreach(var listItem in sportzTagList.tags) {
                 <li><a href="#">@listItem.title</a></li>
             }

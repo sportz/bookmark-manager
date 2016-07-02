@@ -8,7 +8,7 @@
         <div>
             <label>Color</label>
             <select name="colorList" ng-model="newTag.color">
-                <option ng-repeat="option in availableColors" value="{{ option.value }}">{{ option.name }}</option>
+                <option ng-repeat="option in availableColors" value="{{ option.value }}" selected="">{{ option.name }}</option>
             </select>
         </div>
         <input type="submit" ng-click="pushTag()" value="Add Tag" />

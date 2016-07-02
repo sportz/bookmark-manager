@@ -6,41 +6,29 @@
         console.log($scope.model);
         $scope.model.value.tags = [];
     }
-    $scope.availableColors = [
-        {
-            name: "grey",
-            value: "default"
-        },
-        {
-            name: "blue",
-            value: "primary"
-        },
-        {
-            name: "sky",
-            value: "info",
-        },
-        {   name: "green",
-            value: "success"
-        },
-        {
-            name: "yellow",
-            value: "warning"
-        },
-        {
-            name: "red",
-            value: "danger"
-        }];
-    $scope.showEmptyWarning = false;
 
     $scope.newTag = {
         'color': "default",
         'title': ""
     };
+    
+    $scope.availableColors = [
+        { name: "grey", value: "default" },
+        { name: "blue", value: "primary" },
+        { name: "sky", value: "info" },
+        { name: "green", value: "success"},
+        { name: "yellow", value: "warning" },
+        { name: "red", value: "danger" }
+        ];
+    $scope.showEmptyWarning = false;
+
 
     $scope.pushTag = function () {
         if ($scope.newTag.title === "") {
             $scope.showEmptyWarning = true;
             return;
+        } else {
+            $scope.showEmptyWarning = false;
         }
 
         var pushedTag = {
