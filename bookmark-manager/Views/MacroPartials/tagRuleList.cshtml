@@ -16,7 +16,7 @@
         {
             <tr>
                 <td><span class="label label-@tag.color">@tag.title</span></td>
-                <td><a href="@Url.SurfaceAction("HandleDeleteTag", "TagRule", new { tagTitle = tag.title })">
+                <td><a href="@Url.SurfaceAction("HandleDeleteTag", "TagRule", new { tagTitle = tag.title })" onclick="return confirm('Are you sure?')">
                     <span class="glyphicon glyphicon-trash"></span>
                 </a></td>
             </tr>

@@ -20,6 +20,8 @@ namespace bookmark_manager.Classes
 
         public const string MEMBER_ID_ALIAS = "memberId";
         public const string TAG_ALIAS = "tags";
+
+        private static string[] _availableColors;
         
         public static int GetIdOfFirstRootContentNode(string contentTypeAlias)
         {
@@ -67,6 +69,17 @@ namespace bookmark_manager.Classes
             }
 
             return result;
+        }
+
+        public static string[] AvailableColors
+        {
+            get
+            {
+                if (_availableColors == null)
+                    _availableColors = new string[] { "grey", "blue", "sky", "green", "yellow", "red" };
+
+                return _availableColors;
+            }
         }
     }
 }
