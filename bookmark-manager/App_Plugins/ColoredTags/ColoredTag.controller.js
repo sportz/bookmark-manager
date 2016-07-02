@@ -1,9 +1,7 @@
 ﻿angular.module("umbraco").controller("ColoredTag.controller", function ($scope) {
 
-    console.log($scope.model.value);
     if ($scope.model.value === "") {
         $scope.model.value = {};
-        console.log($scope.model);
         $scope.model.value.tags = [];
     }
 
@@ -35,9 +33,27 @@
             'title': $scope.newTag.title,
             'color': $scope.newTag.color
         };
+        for (var i in $scope.model.value.tags) {
+            if ($scope.model.value.tags[i].title === pushedTag.title) {
+                $scope.model.value.tags[i].title = pushedTag.title;
+                $scope.model.value.tags[i].color = pushedTag.color;
+                $scope.newTag.color = "default";
+                $scope.newTag.title = "";
+                return;
+            }
+        }
+
         $scope.model.value.tags.push(pushedTag);
-        console.log($scope.model);
         $scope.newTag.color = "default";
         $scope.newTag.title = "";
+    };
+
+    $scope.deleteTag = function (tagTitle) {
+        for (var i in $scope.model.value.tags) {
+            if ($scope.model.value.tags[i].title === tagTitle) {
+                $scope.model.value.tags.splice(i, 1);
+                return;
+            }
+        }
     };
 });
