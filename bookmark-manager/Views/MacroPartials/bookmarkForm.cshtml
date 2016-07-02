@@ -2,8 +2,6 @@
 @using bookmark_manager.Models;
 
 @{
-    // TODO Fehlermeldungen bei leeren/falschen IDs
-
     var bookmarkId = Request.QueryString["id"];
     var bookmarkModel = new BookmarkFormModel();
     var cs = ApplicationContext.Services.ContentService;

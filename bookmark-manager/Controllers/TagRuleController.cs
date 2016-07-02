@@ -18,6 +18,9 @@ namespace bookmark_manager.Controllers
         [HttpPost]
         public ActionResult HandleFormSubmit(TagRuleModel model)
         {
+            if (!ModelState.IsValid)
+                return CurrentUmbracoPage();
+
             var userNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
 
             // Get user node and tag rules
@@ -55,7 +58,7 @@ namespace bookmark_manager.Controllers
             userNode.SetValue(BookmarkManagerHelpers.TAG_ALIAS, result);
             ApplicationContext.Services.ContentService.Save(userNode);
 
-            return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.TAG_RULE_FORM));
+            return CurrentUmbracoPage();
         }
 
         [HttpGet]

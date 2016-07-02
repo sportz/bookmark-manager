@@ -3255,7 +3255,6 @@
     <Content Include="Umbraco\Webservices\TreeDataService.ashx" />
     <Content Include="Umbraco\Webservices\UltimatePickerAutoCompleteHandler.ashx" />
     <Content Include="Umbraco\Xslt\Web.config" />
-    <Content Include="Views\Bookmark.cshtml" />
     <Content Include="Views\LandingPage.cshtml" />
     <Content Include="Views\Master.cshtml" />
     <Content Include="Views\MacroPartials\tagList.cshtml" />
@@ -3269,9 +3268,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Partials\BookmarkFormView.cshtml" />
-    <Content Include="Views\MemberPage.cshtml" />
     <Content Include="Views\MacroPartials\bookmarkForm.cshtml" />
-    <Content Include="Views\BookmarkForm.cshtml" />
     <Content Include="Views\MacroPartials\memberSettings.cshtml" />
     <Content Include="Views\Partials\TagRuleFormView.cshtml" />
     <Content Include="Views\MacroPartials\tagRuleList.cshtml" />
@@ -3326,6 +3323,7 @@
     <Compile Include="Classes\BookmarkManagerHelpers.cs" />
     <Compile Include="Controllers\BookmarkController.cs" />
     <Compile Include="Classes\umbracoStartup.cs" />
+    <Compile Include="Controllers\MemberSettingsController.cs" />
     <Compile Include="Controllers\TagRuleController.cs" />
     <Compile Include="Models\BookmarkFormModel.cs" />
     <Compile Include="Models\TagRuleModel.cs" />
