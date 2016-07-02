@@ -63,7 +63,12 @@ namespace bookmark_manager.Classes
         public static IContent GetFirstNodeForContentType(string contentTypeAlias)
         {
             var contentService = ApplicationContext.Current.Services.ContentService;
-            var rootNodes = contentService.GetRootContent();
+            var contentTypeService = ApplicationContext.Current.Services.ContentTypeService;
+            //var rootNodes = contentService.GetRootContent();
+
+            var bookmarkManagerContentType = contentTypeService.GetContentType(ROOT);
+            var bookmarkManagerRootNode = contentService.GetContentOfContentType(bookmarkManagerContentType.Id).First();
+            var rootNodes = bookmarkManagerRootNode.Children();
 
             IContent node;
 
@@ -73,7 +78,7 @@ namespace bookmark_manager.Classes
             }
             catch (Exception)
             {
-                node = contentService.CreateContent(contentTypeAlias, -1, contentTypeAlias);
+                node = contentService.CreateContent(contentTypeAlias, bookmarkManagerRootNode, contentTypeAlias);
                 contentService.Save(node);
             }
 
@@ -88,7 +93,7 @@ namespace bookmark_manager.Classes
         public static IContent GetBookmarkNodeForMember(int memberId)
         {
             var bookmarksRoot = GetFirstNodeForContentType(BOOKMARKS_ROOT);
-            var memberBookmarkNode = bookmarksRoot.Children().Where(x => x.GetValue("memberId").Equals(memberId)).First();
+            var memberBookmarkNode = bookmarksRoot.Children().Where(x => x.GetValue(MEMBER_ID_ALIAS).Equals(memberId)).First();
 
             return memberBookmarkNode;
         }
