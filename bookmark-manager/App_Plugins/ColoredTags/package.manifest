@@ -9,7 +9,10 @@
 			}
 		}
 	],
-	javascript: [
-		"~/App_Plugins/ColoredTags/ColoredTag.controller.js"
-	]
+  javascript: [
+    "~/App_Plugins/ColoredTags/ColoredTag.controller.js"
+  ],
+  "css": [
+    "~/App_Plugins/ColoredTags/ColoredTag.editor.css"
+  ]
 }
