@@ -4,16 +4,8 @@
 @using bookmark_manager.Classes;
 @{
     Layout = null;
-
-    var bookmarkForm = BookmarkManagerHelpers.GetFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM);
-    var publishedBookmarkForm = ApplicationContext.Current.Services.ContentService.GetById(bookmarkForm.PublishedVersionGuid);
 }
 
-@if (!umbraco.library.IsLoggedOn())
-{
-    Response.Redirect("/");
-    return;
-}
 else
 {
     <div class="content">
@@ -33,14 +25,18 @@ else
 
         <ul class="bookmark-list">
             @{
-                var bookmarksRootAlias = "bookmarks";
-                var memberIdAlias = "memberId";
+                IEnumerable<IContent> bookmarks;
+                var tagParam = Request.Params["tag"];
 
-                var cs = ApplicationContext.Services.ContentService;
-                var rootNodes = cs.GetRootContent();
-                var bookmarks = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
-                var userBookmarks = bookmarks.Children().Where(x => x.GetValue<int>(memberIdAlias) == Members.GetCurrentMemberId()).First();
-                foreach (var bookmark in userBookmarks.Children())
+                if (tagParam == null)
+                {
+                    bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
+                }
+                else
+                {
+                    bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
+                }
+                foreach (var bookmark in bookmarks)
                 {
                     <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
                 }

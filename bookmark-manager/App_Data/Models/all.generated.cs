@@ -7,7 +7,7 @@ using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
 // FILE: models.generated.cs
@@ -99,10 +99,10 @@ namespace Umbraco.Web.PublishedContentModels
 		///<summary>
 		/// bookmarksLayout
 		///</summary>
-		[ImplementPropertyType("bookmarksLayout")]
-		public Newtonsoft.Json.Linq.JToken BookmarksLayout
+		[ImplementPropertyType("layout")]
+		public Newtonsoft.Json.Linq.JToken Layout
 		{
-			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("bookmarksLayout"); }
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
 		}
 	}
 
@@ -235,6 +235,58 @@ namespace Umbraco.Web.PublishedContentModels
 		public Newtonsoft.Json.Linq.JToken Layout
 		{
 			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
+		}
+	}
+
+	/// <summary>Bookmark Manager</summary>
+	[PublishedContentModel("bookmarkManager")]
+	public partial class BookmarkManager : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "bookmarkManager";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public BookmarkManager(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BookmarkManager, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+	}
+
+	/// <summary>bookmarksManagerLayout</summary>
+	[PublishedContentModel("bookmarksManagerLayout")]
+	public partial class BookmarksManagerLayout : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "bookmarksManagerLayout";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public BookmarksManagerLayout(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BookmarksManagerLayout, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
 		}
 	}
 

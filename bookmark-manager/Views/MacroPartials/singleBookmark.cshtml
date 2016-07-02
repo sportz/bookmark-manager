@@ -43,27 +43,29 @@
         <p>@link</p>
     </a>
     <!-- Tags-->
-    @if (bookmarkTag[0] != "") {
+    @if (bookmarkTag[0] != "")
+    {
         <div class="bookmark-tags">
             @{
-                foreach (var tagName in bookmarkTag) {
+                foreach (var tagName in bookmarkTag)
+                {
                     string tagColor = "default";
-                    foreach (var coloredTag in coloredTagList.tags) {
-                        if( coloredTag.title == tagName) {
+                    foreach (var coloredTag in coloredTagList.tags)
+                    {
+                        if (coloredTag.title == tagName)
+                        {
                             tagColor = coloredTag.color;
                         }
                     }
-                    // TODO Link-Adresse 
-                <a href="#" >
-                    <span class="label label-@tagColor">@tagName</span>
-                </a>
+                    // TODO Link-Adresse
+                    <a href="#">
+                        <span class="label label-@tagColor">@tagName</span>
+                    </a>
                 }
             }
-    </div>
-    }
-
-
         </div>
+    }
+</div>
 
 <!-- Edit -->
 <div class="bookmark-action">

@@ -14,6 +14,8 @@ namespace bookmark_manager.Classes
         public const string BOOKMARK_FORM = "bookmarkForm";
         public const string BOOKMARKS_MEMBER = "bookmarksMember";
         public const string LANDING_PAGE = "landingPage";
+
+        private const string MEMBER_ID_ALIAS = "memberId";
         
         public static int GetIdOfFirstRootContentNode(string contentTypeAlias)
         {
@@ -47,6 +49,20 @@ namespace bookmark_manager.Classes
             var memberBookmarkNode = bookmarksRoot.Children().Where(x => x.GetValue("memberId").Equals(memberId)).First();
 
             return memberBookmarkNode;
+        }
+
+        public static IEnumerable<IContent> GetBookmarksForCurrentMember(int memberId, string tagFilter = "")
+        {
+            var contentService = ApplicationContext.Current.Services.ContentService;
+            var bookmarkNode = GetBookmarkNodeForMember(memberId);
+            var result = bookmarkNode.Children();
+
+            if (!string.IsNullOrEmpty(tagFilter))
+            {
+                result = result.Where(x => x.GetValue("tags").ToString().Contains(tagFilter));
+            }
+
+            return result;
         }
     }
 }
