@@ -18,6 +18,9 @@ namespace bookmark_manager.Controllers
         [HttpPost]
         public ActionResult HandleFormSubmit(BookmarkFormModel model)
         {
+            if (!ModelState.IsValid)
+                return CurrentUmbracoPage();
+
             var contentService = ApplicationContext.Services.ContentService;
             
             IContent bookmark;
