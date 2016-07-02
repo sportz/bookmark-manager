@@ -9,6 +9,7 @@ using Umbraco.Core.Models;
 using Umbraco.Web;
 using Umbraco.Web.Mvc;
 using bookmark_manager.Classes;
+using Umbraco.Core.Services;
 
 namespace bookmark_manager.Controllers
 {
@@ -38,6 +39,23 @@ namespace bookmark_manager.Controllers
             contentService.Save(bookmark);
 
             return new RedirectToUmbracoPageResult(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARKS_ROOT));
+        }
+
+        [HttpGet]
+        public ActionResult HandleBookmarkDelete()
+        {
+            var id = ControllerContext.RequestContext.RouteData.Values["id"].ToString();
+            int idInt;
+            
+            if (int.TryParse(id, out idInt))
+            {
+                var contentService = ApplicationContext.Services.ContentService;
+                var bookmarkNode = contentService.GetById(idInt);
+
+                contentService.Delete(bookmarkNode);
+            }
+            
+            return RedirectToCurrentUmbracoPage();
         }
     }
 }
