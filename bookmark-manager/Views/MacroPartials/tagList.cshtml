@@ -15,6 +15,7 @@
         <li><a href="/bookmarks">All Bookmarks</a></li>
         
         @{
+            
             var bookmarksRootAlias = "bookmarks";
             var memberIdAlias = "memberId";
             var tagsAlias = "tags";
@@ -25,38 +26,36 @@
             var userBookmarks = bookmarks.Children().Where(x => x.GetValue
             <int>
                 (memberIdAlias) == Members.GetCurrentMemberId()).First();
+@*
+    var tagList = new List<string>();
 
-            var tagList = new List<string>();
+    foreach (var bookmark in userBookmarks.Children())
+    {
+        var tagsString = bookmark.GetValue<string>(tagsAlias);
+        string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-            foreach (var bookmark in userBookmarks.Children())
+        if (bookmarkTagList != null && bookmarkTagList.Length > 0)
+        {
+            foreach (var tag in bookmarkTagList)
             {
-                var tagsString = bookmark.GetValue<string>(tagsAlias);
-                string[] bookmarkTagList = tagsString.Split(new Char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                if (bookmarkTagList != null && bookmarkTagList.Length > 0)
+                if (!tagList.Contains(tag))
                 {
-                    foreach (var tag in bookmarkTagList)
-                    {
-                        if (!tagList.Contains(tag))
-                        {
-                            tagList.Add(tag);
-                        }
-                    }
+                    tagList.Add(tag);
                 }
             }
+        }
+    }
 
-            tagList.Sort();
+    tagList.Sort();
 
-            foreach (var tag in tagList)
-            {
-                <li><a href="#">@tag</a></li>
-            }
+    foreach (var tag in tagList)
+    {
+        <li><a href="#">@tag</a></li>
+    }
+*@
 
-
-            // Hier kommen meine
-            <li>Alles ab hier kommt vom Sportz</li>
-            dynamic sportzTagList = JsonConvert.DeserializeObject(userBookmarks.GetValue<string>(tagsAlias).Replace("&quot;", "\""));
-            foreach(var listItem in sportzTagList.tags) {
+            dynamic tagList = JsonConvert.DeserializeObject(userBookmarks.GetValue<string>(tagsAlias).Replace("&quot;", "\""));
+            foreach(var listItem in tagList.tags) {
                 <li><a href="#">@listItem.title</a></li>
             }
         }

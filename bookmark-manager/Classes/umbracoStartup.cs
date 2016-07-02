@@ -57,7 +57,7 @@ namespace bookmark_manager.Classes {
             }
             catch (System.Exception error){
                 bookmarksRoot = contentService.CreateContent("Bookmarks Root", -1, bookmarksRootAlias);
-                contentService.SaveAndPublishWithStatus(bookmarksRoot);
+                contentService.Save(bookmarksRoot);
             }
 
             // Create the BookmarksMember Content Node and assign values for memberId and Taglist

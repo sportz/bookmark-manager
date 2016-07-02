@@ -1,14 +1,21 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using Newtonsoft.Json
 
 @{
     var bookmarkId = Model.MacroParameters["bookmarkId"].TryConvertTo<int>();
     var cs = ApplicationContext.Services.ContentService;
     var bookmark = cs.GetById(bookmarkId.Result);
 
+    var tagsAlias = "tags";
+
+    var userBookmarks = bookmark.Parent();
+    var tagListString = userBookmarks.GetValue<string>(tagsAlias).Replace("&quot;", "\"");
+    dynamic coloredTagList = JsonConvert.DeserializeObject(tagListString);
+
     var title = bookmark.GetValue<string>("title");
     var link = bookmark.GetValue<string>("link");
     var tagsString = bookmark.GetValue<string>("tags");
-    string[] tags = tagsString.Split(new Char[] { ',' });
+    string[] bookmarkTag = tagsString.Split(new Char[] { ',' });
 
     // Url des FavIcon zusammen bauen
     string favIconService = "http://www.google.com/s2/favicons?domain_url=";
@@ -29,16 +36,23 @@
         <p>@link</p>
     </a>
     <!-- Tags-->
-    @if (tags[0] != "") {
+    @if (bookmarkTag[0] != "") {
         <div class="bookmark-tags">
-            @foreach (var tag in tags) {
-                // TODO Link-Adresse 
-                // TODO Label-Farbe
+            @{
+                foreach (var tagName in bookmarkTag) {
+                    string tagColor = "default";
+                    foreach (var coloredTag in coloredTagList.tags) {
+                        if( coloredTag.title == tagName) {
+                            tagColor = coloredTag.color;
+                        }
+                    }
+                    // TODO Link-Adresse 
                 <a href="#" >
-                    <span class="label label-blue">@tag</span>
+                    <span class="label label-@tagColor">@tagName</span>
                 </a>
+                }
             }
-        </div>
+    </div>
     }
 
 
