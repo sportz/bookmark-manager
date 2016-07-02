@@ -18,8 +18,9 @@ namespace bookmark_manager.Classes {
             MemberService.Created += createUserBookmarkNodeAfterRegister;
 
             // TODO Eventhandler wenn Member gelöscht wird
-            // MemberService.Deleted += deleteUserBookmarkContent;
+            MemberService.Deleting += deleteUserBookmarkContent;
         }
+
 
         public void OnApplicationStarted(UmbracoApplicationBase umbracoApplication, ApplicationContext applicationContext) {
             //throw new NotImplementedException();
@@ -66,5 +67,17 @@ namespace bookmark_manager.Classes {
             userBookmarksNode.SetValue(tagsAlias, tagsContent);
             contentService.Save(userBookmarksNode);
         }
+
+        private void deleteUserBookmarkContent(IMemberService sender, DeleteEventArgs<IMember> e) {
+
+            var contentService = ApplicationContext.Current.Services.ContentService;
+
+            var member = e.DeletedEntities.First();
+            int memberId = member.Id;
+
+            var userBookmarks = BookmarkManagerHelpers.GetBookmarkNodeForMember(memberId);
+            contentService.Delete(userBookmarks);
+        }
+
     }
 }
