@@ -7,7 +7,7 @@ using  Umbraco.Core.Models.PublishedContent;
 using  Umbraco.Web;
 using  Umbraco.ModelsBuilder;
 using  Umbraco.ModelsBuilder.Umbraco;
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.2")]
 
 
 // FILE: models.generated.cs
@@ -139,6 +139,15 @@ namespace Umbraco.Web.PublishedContentModels
 		{
 			get { return this.GetPropertyValue("memberId"); }
 		}
+
+		///<summary>
+		/// tagss
+		///</summary>
+		[ImplementPropertyType("tagss")]
+		public object Tagss
+		{
+			get { return this.GetPropertyValue("tagss"); }
+		}
 	}
 
 	/// <summary>Bookmark</summary>
@@ -191,6 +200,41 @@ namespace Umbraco.Web.PublishedContentModels
 		public string Title
 		{
 			get { return this.GetPropertyValue<string>("title"); }
+		}
+	}
+
+	/// <summary>Default Grid</summary>
+	[PublishedContentModel("defaultGrid")]
+	public partial class DefaultGrid : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "defaultGrid";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public DefaultGrid(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<DefaultGrid, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// Layout
+		///</summary>
+		[ImplementPropertyType("layout")]
+		public Newtonsoft.Json.Linq.JToken Layout
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
 		}
 	}
 
