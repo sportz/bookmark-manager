@@ -75,7 +75,7 @@
 <div class="bookmark-action">
     <!-- TODO Link/controller action -->
     <!-- TODO Confirmation -->
-    <a href="@Url.SurfaceAction("HandleBookmarkDelete", "Bookmark", new { id = bookmarkId.Result })">
+    <a href="@Url.SurfaceAction("HandleBookmarkDelete", "Bookmark", new { id = bookmarkId.Result })" onclick="return confirm('Are you sure?')">
         <span class="glyphicon glyphicon-trash"></span>
     </a>
 </div>
