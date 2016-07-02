@@ -1,9 +1,12 @@
 ﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
 @using umbraco.cms.businesslogic.member;
 @using ContentModels = Umbraco.Web.PublishedContentModels;
+@using bookmark_manager.Classes;
 @{
     Layout = null;
 
+    var bookmarkForm = BookmarkManagerHelpers.GetFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM);
+    var publishedBookmarkForm = ApplicationContext.Current.Services.ContentService.GetById(bookmarkForm.PublishedVersionGuid);
 }
 
 @if (!umbraco.library.IsLoggedOn())
@@ -15,12 +18,16 @@ else
 {
     <div class="content">
         <div class="toolbar">
-            <a class="navbar-brand" href="/bookmarks">
+            <a class="navbar-brand" href="#">
                 <!-- TODO Tag name -->
                 All Bookmarks
             </a>  
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-plus"></span></a></li>
+                <li>
+                    <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </li>
             </ul>
         </div>
 

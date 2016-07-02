@@ -21,6 +21,9 @@
     string favIconService = "http://www.google.com/s2/favicons?domain_url=";
     string linkUrl = Url.Encode(bookmark.GetValue("link").ToString());
     string favIconUrl = favIconService + linkUrl;
+
+    // Edit-Url zusammen bauen
+    var editUrl = string.Format("/edit-bookmark?id={0}", bookmarkId.Result);
 }
 
 <!-- Favicon -->
@@ -61,7 +64,7 @@
 <!-- Edit -->
 <div class="bookmark-action">
     <!-- TODO Link/Controller action -->
-    <a href="#"><span class="glyphicon glyphicon-edit"></span></a>
+    <a href="@editUrl"><span class="glyphicon glyphicon-edit"></span></a>
 </div>
 
 <!-- Delete -->
