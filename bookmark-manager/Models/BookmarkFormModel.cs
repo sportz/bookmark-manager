@@ -8,7 +8,9 @@ namespace bookmark_manager.Models
     public class BookmarkFormModel
     {
         public string title { get; set; }
-        public string url { get; set; }
+        public string link { get; set; }
+        public string tagsString { get; set; }
 
+        public int id { get; set; }
     }
 }

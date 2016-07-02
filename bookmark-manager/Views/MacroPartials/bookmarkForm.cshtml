@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using bookmark_manager.Models;
+
+@{
+    // TODO Fehlermeldungen bei leeren/falschen IDs
+
+    var bookmarkId = Request.QueryString["id"];
+    var bookmarkModel = new BookmarkFormModel();
+    var cs = ApplicationContext.Services.ContentService;
+    var bookmarkIdInt = 0;
+
+    if (!string.IsNullOrWhiteSpace(bookmarkId))
+    {
+        int.TryParse(bookmarkId, out bookmarkIdInt);
+    }
+
+    var bookmarkContent = cs.GetById(bookmarkIdInt);
+
+    if (bookmarkContent != null)
+    {
+        bookmarkModel.title = bookmarkContent.GetValue<string>("title");
+        bookmarkModel.link = bookmarkContent.GetValue<string>("link");
+        bookmarkModel.tagsString = bookmarkContent.GetValue<string>("tags");
+        bookmarkModel.id = bookmarkIdInt;
+    }
+    else
+    {
+        bookmarkModel.title = "Untitled";
+        bookmarkModel.id = bookmarkIdInt;
+    }
+}
+
+@{
+	Html.RenderPartial("~/Views/Partials/BookmarkFormView.cshtml", bookmarkModel);
+}
