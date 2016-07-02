@@ -18,7 +18,7 @@ using Umbraco.Web;
 using Umbraco.ModelsBuilder;
 using Umbraco.ModelsBuilder.Umbraco;
 
-[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.3")]
+[assembly: PureLiveAssembly, System.Reflection.AssemblyVersion("0.0.0.1")]
 
 namespace Umbraco.Web.PublishedContentModels
 {
@@ -250,16 +250,16 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 	}
 
-	/// <summary>bookmarksManagerLayout</summary>
-	[PublishedContentModel("bookmarksManagerLayout")]
-	public partial class BookmarksManagerLayout : PublishedContentModel
+	/// <summary>Member Settings</summary>
+	[PublishedContentModel("memberSettings")]
+	public partial class MemberSettings : PublishedContentModel
 	{
 #pragma warning disable 0109 // new is redundant
-		public new const string ModelTypeAlias = "bookmarksManagerLayout";
+		public new const string ModelTypeAlias = "memberSettings";
 		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
 #pragma warning restore 0109
 
-		public BookmarksManagerLayout(IPublishedContent content)
+		public MemberSettings(IPublishedContent content)
 			: base(content)
 		{ }
 
@@ -270,9 +270,53 @@ namespace Umbraco.Web.PublishedContentModels
 		}
 #pragma warning restore 0109
 
-		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<BookmarksManagerLayout, TValue>> selector)
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<MemberSettings, TValue>> selector)
 		{
 			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// layout
+		///</summary>
+		[ImplementPropertyType("layout")]
+		public Newtonsoft.Json.Linq.JToken Layout
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
+		}
+	}
+
+	/// <summary>Tag Form</summary>
+	[PublishedContentModel("tagForm")]
+	public partial class TagForm : PublishedContentModel
+	{
+#pragma warning disable 0109 // new is redundant
+		public new const string ModelTypeAlias = "tagForm";
+		public new const PublishedItemType ModelItemType = PublishedItemType.Content;
+#pragma warning restore 0109
+
+		public TagForm(IPublishedContent content)
+			: base(content)
+		{ }
+
+#pragma warning disable 0109 // new is redundant
+		public new static PublishedContentType GetModelContentType()
+		{
+			return PublishedContentType.Get(ModelItemType, ModelTypeAlias);
+		}
+#pragma warning restore 0109
+
+		public static PublishedPropertyType GetModelPropertyType<TValue>(Expression<Func<TagForm, TValue>> selector)
+		{
+			return PublishedContentModelUtility.GetModelPropertyType(GetModelContentType(), selector);
+		}
+
+		///<summary>
+		/// layout
+		///</summary>
+		[ImplementPropertyType("layout")]
+		public Newtonsoft.Json.Linq.JToken Layout
+		{
+			get { return this.GetPropertyValue<Newtonsoft.Json.Linq.JToken>("layout"); }
 		}
 	}
 

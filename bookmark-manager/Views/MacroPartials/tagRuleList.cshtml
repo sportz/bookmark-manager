@@ -1,0 +1,25 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+@using bookmark_manager.Classes;
+@using Newtonsoft.Json
+
+@{
+    var userNode = BookmarkManagerHelpers.GetBookmarkNodeForMember(Members.GetCurrentMemberId());
+    dynamic tagList = JsonConvert.DeserializeObject(userNode.GetValue<string>(BookmarkManagerHelpers.TAG_ALIAS).Replace("&quot;", "\""));
+}
+
+<hr/>
+<h1>Rules</h1>
+
+<table class="tag-table">
+    <tbody>
+        @foreach (var tag in tagList.tags)
+        {
+            <tr>
+                <td><span class="label label-@tag.color">@tag.title</span></td>
+                <td><a href="@Url.SurfaceAction("HandleDeleteTag", "TagRule", new { tagTitle = tag.title })">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a></td>
+            </tr>
+        }
+    </tbody>
+</table>

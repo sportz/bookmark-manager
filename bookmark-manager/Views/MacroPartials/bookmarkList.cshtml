@@ -5,49 +5,42 @@
 @{
     Layout = null;
 
-    var bookmarkForm = BookmarkManagerHelpers.GetFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM);
-    var publishedBookmarkForm = ApplicationContext.Current.Services.ContentService.GetById(bookmarkForm.PublishedVersionGuid);
+    IEnumerable<IContent> bookmarks;
+    string title = "All Bookmarks";
+    var tagParam = Request.Params["tag"];
+
+    if (tagParam == null)
+    {
+        bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
+    }
+    else
+    {
+        title = tagParam;
+        bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
+    }
+
 }
 
-@if (!umbraco.library.IsLoggedOn())
-{
-    Response.Redirect("/");
-    return;
-}
-else
-{
-    <div class="content">
-        <div class="toolbar">
-            <a class="navbar-brand" href="#">
-                <!-- TODO Tag name -->
-                All Bookmarks
-            </a>  
-            <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-        <ul class="bookmark-list">
-            @{
-                var bookmarksRootAlias = "bookmarks";
-                var memberIdAlias = "memberId";
-
-                var cs = ApplicationContext.Services.ContentService;
-                var rootNodes = cs.GetRootContent();
-                var bookmarks = rootNodes.Where(x => x.ContentType.Alias == bookmarksRootAlias).First();
-                var userBookmarks = bookmarks.Children().Where(x => x.GetValue<int>(memberIdAlias) == Members.GetCurrentMemberId()).First();
-                foreach (var bookmark in userBookmarks.Children())
-                {
-                    <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
-                }
-            }
+<div class="content">
+    <div class="toolbar">
+        <a class="navbar-brand" href="#">
+            @title
+        </a>  
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARK_FORM))">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </li>
         </ul>
     </div>
-}
 
-
-
+    <ul class="bookmark-list">
+        @{
+            foreach (var bookmark in bookmarks)
+            {
+                <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
+            }
+        }
+    </ul>
+</div>
