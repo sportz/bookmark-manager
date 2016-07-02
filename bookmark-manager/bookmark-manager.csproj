@@ -3273,6 +3273,9 @@
     <Content Include="Views\MacroPartials\bookmarkForm.cshtml" />
     <Content Include="Views\BookmarkForm.cshtml" />
     <Content Include="Views\MacroPartials\memberSettings.cshtml" />
+    <Content Include="Views\Partials\TagRuleFormView.cshtml" />
+    <Content Include="Views\MacroPartials\tagRuleList.cshtml" />
+    <Content Include="Views\MacroPartials\tagForm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3323,7 +3326,9 @@
     <Compile Include="Classes\BookmarkManagerHelpers.cs" />
     <Compile Include="Controllers\BookmarkController.cs" />
     <Compile Include="Classes\umbracoStartup.cs" />
+    <Compile Include="Controllers\TagRuleController.cs" />
     <Compile Include="Models\BookmarkFormModel.cs" />
+    <Compile Include="Models\TagRuleModel.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
     <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />

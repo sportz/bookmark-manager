@@ -14,6 +14,7 @@ namespace bookmark_manager.Classes
         public const string BOOKMARK_FORM = "bookmarkForm";
         public const string BOOKMARKS_MEMBER = "bookmarksMember";
         public const string LANDING_PAGE = "landingPage";
+        public const string TAG_RULE_FORM = "tagForm";
 
         public const string MEMBER_ID_ALIAS = "memberId";
         public const string TAG_ALIAS = "tags";

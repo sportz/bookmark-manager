@@ -4,13 +4,27 @@
 @using bookmark_manager.Classes;
 @{
     Layout = null;
+
+    IEnumerable<IContent> bookmarks;
+    string title = "All Bookmarks";
+    var tagParam = Request.Params["tag"];
+
+    if (tagParam == null)
+    {
+        bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
+    }
+    else
+    {
+        title = tagParam;
+        bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
+    }
+
 }
 
 <div class="content">
     <div class="toolbar">
         <a class="navbar-brand" href="#">
-            <!-- TODO Tag name -->
-            All Bookmarks
+            @title
         </a>  
         <ul class="nav navbar-nav navbar-right">
             <li>
@@ -23,17 +37,6 @@
 
     <ul class="bookmark-list">
         @{
-            IEnumerable<IContent> bookmarks;
-            var tagParam = Request.Params["tag"];
-
-            if (tagParam == null)
-            {
-                bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId());
-            }
-            else
-            {
-                bookmarks = BookmarkManagerHelpers.GetBookmarksForCurrentMember(Members.GetCurrentMemberId(), tagParam.ToString());
-            }
             foreach (var bookmark in bookmarks)
             {
                 <li>@Umbraco.RenderMacro("singleBookmark", new { bookmarkId = bookmark.Id })</li>
