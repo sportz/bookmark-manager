@@ -4,6 +4,7 @@
 @using Umbraco.Web
 @using Umbraco.Web.Models
 @using Umbraco.Web.Controllers
+@using bookmark_manager.Classes
 @{
     var loginStatusModel = Members.GetCurrentLoginStatus();
 
@@ -26,13 +27,22 @@
 }
 @* NOTE: This RenderJsHere code should be put on your main template page where the rest of your script tags are placed *@
 @Html.RenderJsHere()
-@if (loginStatusModel.IsLoggedIn)
-{
+@if (loginStatusModel.IsLoggedIn) {
     <div class="navbar-right">
-        <p class="navbar-text navbar-left">
-            <span class="glyphicon glyphicon-user"></span>
-            @loginStatusModel.Name
-        </p>
+        <ul class="nav navbar-left navbar-nav">
+            <li>
+                @{ 
+                    var memberSettings = BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.MEMBER_SETTINGS);
+                    var memberSettingsUrl = Umbraco.NiceUrl(memberSettings);
+
+                    <a href="@memberSettingsUrl">
+                    <span class="glyphicon glyphicon-user"></span>
+                    @loginStatusModel.Name
+                    </a>
+                }
+            </li>
+        </ul>
+            
 
         @using (Html.BeginUmbracoForm<UmbLoginStatusController>("HandleLogout", new { }, new { @class = "navbar-form navbar-left" }))
         {

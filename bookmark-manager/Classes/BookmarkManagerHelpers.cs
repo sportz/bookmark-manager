@@ -14,6 +14,8 @@ namespace bookmark_manager.Classes
         public const string BOOKMARK_FORM = "bookmarkForm";
         public const string BOOKMARKS_MEMBER = "bookmarksMember";
         public const string LANDING_PAGE = "landingPage";
+        public const string ROOT = "bookmarkManager";
+        public const string MEMBER_SETTINGS = "memberSettings";
         
         public static int GetIdOfFirstRootContentNode(string contentTypeAlias)
         {

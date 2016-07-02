@@ -5,6 +5,8 @@
 @using ClientDependency.Core.Mvc
 @using Umbraco.Web
 @using Umbraco.Web.Controllers
+@using bookmark_manager.Controllers
+@using bookmark_manager.Models
 
 @{
     var profileModel = Members.GetCurrentMemberProfileModel();
@@ -37,34 +39,40 @@
             @Html.ValidationSummary("profileModel", true)
             <div class="form-group">
                 @Html.LabelFor(m => profileModel.Name)
-                @Html.TextBoxFor(m => profileModel.Name)
+                @Html.TextBoxFor(m => profileModel.Name, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => profileModel.Name)
             </div>
             
             <div class="form-group">
                 @Html.LabelFor(m => profileModel.Email)
-                @Html.TextBoxFor(m => profileModel.Email)
+                @Html.TextBoxFor(m => profileModel.Email, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => profileModel.Email)
             </div>
           
-            <br />
-
-            @for (var i = 0; i < profileModel.MemberProperties.Count; i++)
-            {
-                @Html.LabelFor(m => profileModel.MemberProperties[i].Value, profileModel.MemberProperties[i].Name)
-                @* 
-                    By default this will render a textbox but if you want to change the editor template for this property you can 
-                    easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
-                    create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to 
-                    render your specific editor template like:
-                    @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
-                *@
-                @Html.EditorFor(m => profileModel.MemberProperties[i].Value)
-                @Html.HiddenFor(m => profileModel.MemberProperties[i].Alias)
-                <br />
-            }
-
-            <button>Save</button>
+            <div class="form-group">
+                @for (var i = 0; i < profileModel.MemberProperties.Count; i++) {
+                    @Html.LabelFor(m => profileModel.MemberProperties[i].Value, profileModel.MemberProperties[i].Name)
+                    @*
+            By default this will render a textbox but if you want to change the editor template for this property you can
+            easily change it. For example, if you wanted to render a custom editor for this field called "MyEditor" you would
+            create a file at ~/Views/Shared/EditorTemplates/MyEditor.cshtml", then you will change the next line of code to
+            render your specific editor template like:
+            @Html.EditorFor(m => profileModel.MemberProperties[i].Value, "MyEditor")
+                    *@
+                    @Html.EditorFor(m => profileModel.MemberProperties[i].Value)
+                    @Html.HiddenFor(m => profileModel.MemberProperties[i].Alias)
+                    <br />
+                }
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary">Save</button>
+            </div>
         </fieldset>
-    }       
+    }      
+    <hr />
+    <h1>Cancel my account</h1>
+    <p>Once you delete your account all data is lost and cannot be restored!</p>
+    using (Html.BeginUmbracoForm<MemberSettingsController>("HandleMemberDelete", FormMethod.Post)) {
+        <input type="submit" class="btn-delete-account" value="Delete Account" onclick="return confirm('Are you sure')"/>
+    }
 }
