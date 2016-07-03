@@ -4,9 +4,7 @@
 @using bookmark_manager.Classes;
 
 @{
-    // var Umbraco = new UmbracoHelper();
-    // var bookmarksUrl = Umbraco.NiceUrl(BookmarkManagerHelpers.GetIdOfFirstRootContentNode(BookmarkManagerHelpers.BOOKMARKS_ROOT));
-    var bookmarksUrl = "/bookmarks";
+    var bookmarksUrl = umbraco.library.NiceUrl(BookmarkManagerHelpers.GetFirstNodeIdForContentType(BookmarkManagerHelpers.BOOKMARKS_ROOT));
 }
 
 @using (Html.BeginUmbracoForm<BookmarkController>("HandleFormSubmit")) 
